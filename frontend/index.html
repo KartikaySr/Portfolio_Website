@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartikay Srivastava — Software Engineer</title>
+  
+  <meta name="description" content="Kartikay Srivastava - Software Engineer building backend systems, real-time infrastructure, and AI-powered products.">
+  <meta property="og:title" content="Kartikay Srivastava — Software Engineer">
+  <meta property="og:description" content="Backend systems, real-time infrastructure, and AI-native products.">
+  <meta property="og:image" content="1777716468545.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/index.min.js"></script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            omni: {
+              main: 'var(--omni-main)',
+              dim: 'var(--omni-dim)',
+              glow: 'var(--omni-glow)',
+            },
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              900: '#164e63'
+            }
+          },
+          animation: {
+            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --omni-main: #38e26a; 
+      --omni-dim: rgba(56, 226, 106, 0.15);
+      --omni-glow: rgba(56, 226, 106, 0.4);
+    }
+    html.theme-gold {
+      --omni-main: #e8b93e; 
+      --omni-dim: rgba(232, 185, 62, 0.15);
+      --omni-glow: rgba(232, 185, 62, 0.4);
+    }
+    html.theme-blue {
+      --omni-main: #06b6d4; 
+      --omni-dim: rgba(6, 182, 212, 0.15);
+      --omni-glow: rgba(6, 182, 212, 0.4);
+    }
+
+    body {
+      background-color: #fafafa;
+      color: #171717;
+      overflow-x: hidden;
+      cursor: none;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    html.dark body { background-color: #050505; color: #f5f5f5; }
+    ::selection { background-color: var(--omni-main); color: #000; }
+
+    /* TRUE 3D GRID (Will be transformed by JS Parallax) */
+    .bg-grid {
+      position: fixed; inset: -50px; z-index: -20;
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 30%, transparent 100%);
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+    html.dark .bg-grid { background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); }
+
+    #river-canvas { position: fixed; inset: 0; z-index: -10; pointer-events: none; opacity: 0.6; transition: opacity 0.5s ease; }
+    html.dark #river-canvas { opacity: 0.9; }
+
+    .glass-nav { background: rgba(250, 250, 250, 0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+    html.dark .glass-nav { background: rgba(5, 5, 5, 0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05), inset 0 2px 10px rgba(255,255,255,0.8);
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    html.dark .glass-card {
+      background: linear-gradient(145deg, rgba(20,20,20,0.6) 0%, rgba(5,5,5,0.85) 100%);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.05); 
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8), inset 0 2px 10px rgba(255,255,255,0.05);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.9), 0 0 50px -15px var(--omni-main), inset 0 2px 10px rgba(255,255,255,0.08); 
+    }
+
+    /* SNAKE TRACE CONTINUOUS FILL EFFECT */
+    .snake-trace { position: absolute; z-index: 20; background: var(--omni-main); box-shadow: 0 0 10px var(--omni-main); pointer-events: none; }
+    .trace-top { top: 0; left: 0; width: 0; height: 2px; transition: width 0.15s ease-in; transition-delay: 0.45s; }
+    .trace-right { top: 0; right: 0; width: 2px; height: 0; transition: height 0.15s ease-in; transition-delay: 0.3s; }
+    .trace-bottom { bottom: 0; right: 0; width: 0; height: 2px; transition: width 0.15s ease-in; transition-delay: 0.15s; }
+    .trace-left { bottom: 0; left: 0; width: 2px; height: 0; transition: height 0.15s ease-in; transition-delay: 0s; }
+
+    .group:hover .trace-top { width: 100%; transition-delay: 0s; }
+    .group:hover .trace-right { height: 100%; transition-delay: 0.15s; }
+    .group:hover .trace-bottom { width: 100%; transition-delay: 0.3s; }
+    .group:hover .trace-left { height: 100%; transition-delay: 0.45s; }
+
+    @keyframes antiGravity {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+    .zero-g-1 { animation: antiGravity 6s ease-in-out infinite; will-change: transform; }
+    .zero-g-2 { animation: antiGravity 7s ease-in-out infinite reverse; will-change: transform; }
+    .zero-g-3 { animation: antiGravity 8s ease-in-out infinite; animation-delay: 1s; will-change: transform; }
+    .zero-g-4 { animation: antiGravity 6.5s ease-in-out infinite reverse; animation-delay: 0.5s; will-change: transform; }
+
+    .spatial-float { transform-style: preserve-3d; will-change: transform; transition: transform 0.1s ease-out; }
+    .spatial-float.resetting { transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+    #cursor-ring { position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--omni-main); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+    #cursor-dot { position: fixed; width: 4px; height: 4px; background-color: var(--omni-main); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); }
+    a:hover ~ #cursor-ring, button:hover ~ #cursor-ring, .interactive:hover ~ #cursor-ring, .group:hover ~ #cursor-ring { width: 50px; height: 50px; background-color: var(--omni-dim); }
+
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background-color: #000; transition: all 0.3s ease; transform: translateX(-50%); }
+    html.dark .nav-link::after { background-color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
+    .omni-text { color: var(--omni-main) !important; text-shadow: 0 0 10px var(--omni-glow); }
+    .omni-bg { background-color: var(--omni-main) !important; box-shadow: 0 0 15px var(--omni-glow); }
+    .omni-border { border-color: var(--omni-main) !important; box-shadow: 0 0 10px var(--omni-glow) inset; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    @keyframes glitter {
+      0% { background-position: 200% center; }
+      100% { background-position: 0% center; }
+    }
+    .glitter-quote {
+      background: linear-gradient(90deg, #737373 0%, #D4D4D8 25%, #171717 50%, #D4D4D8 75%, #737373 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glitter 4s linear infinite;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-block;
+      cursor: crosshair;
+    }
+    html.dark .glitter-quote {
+      background: linear-gradient(90deg, #737373 0%, #D4D4D8 25%, #FFFFFF 50%, #D4D4D8 75%, #737373 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glitter-quote:hover {
+      background: none;
+      -webkit-text-fill-color: var(--omni-main);
+      text-shadow: 0 0 15px var(--omni-main), 0 0 35px var(--omni-glow);
+      transform: scale(1.05);
+      animation: none;
+    }
+
+    #boot-screen, #omni-hud-overlay { position: fixed; inset: 0; z-index: 100000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
+    #boot-screen { background: #030303; }
+    #omni-hud-overlay { background: rgba(0, 0, 0, 0.95); display: none; }
+    #hud-flash { position: fixed; inset: 0; background: #22d3ee; z-index: 100001; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-out; display: none; }
+    
+    .glow-text { text-shadow: 0 0 15px currentColor; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--omni-main); border-radius: 4px; }
+
+    #project-modal-backdrop {
+      position: fixed; inset: 0; z-index: 80000; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    #project-modal-backdrop.active { opacity: 1; pointer-events: auto; }
+    
+    .modal-content {
+      background: linear-gradient(145deg, rgba(20,20,20,0.95) 0%, rgba(5,5,5,0.98) 100%);
+      border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px var(--omni-glow) inset;
+      border-radius: 1.5rem; max-width: 900px; w-full; max-height: 90vh; overflow-y: auto;
+      transform: scale(0.95) translateY(20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #project-modal-backdrop.active .modal-content { transform: scale(1) translateY(0); }
+
+    #overdrive-landing {
+      position: fixed; inset: 0; z-index: 60000; background-color: transparent; 
+      overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; display: none;
+    }
+    #overdrive-landing.active { opacity: 1; pointer-events: auto; display: block; }
+    .timeline-node { width: 16px; height: 16px; background: #06b6d4; border-radius: 50%; box-shadow: 0 0 20px #06b6d4, 0 0 40px #06b6d4; position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; }
+    .timeline-card { background: rgba(10, 25, 40, 0.7); border: 1px solid rgba(6, 182, 212, 0.3); backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.1); border-radius: 1.5rem; padding: 24px; position: relative; width: 45%; transition: all 0.3s ease; }
+    .timeline-card:hover { border-color: #06b6d4; box-shadow: 0 0 50px rgba(6, 182, 212, 0.3); transform: translateY(-5px) translateZ(40px) scale(1.05); }
+    
+    /* 3D Core Utilities */
+    .perspective-1000 { perspective: 1000px; }
+    .preserve-3d { transform-style: preserve-3d; }
+    .float-child { transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    
+    #warp-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.4; }
+  </style>
+</head>
+<body>
+
+  <div id="boot-screen">
+    <div class="relative w-20 h-20 rounded-full border-[5px] border-omni-main mb-8 shadow-[0_0_30px_var(--omni-glow)] flex items-center justify-center animate-[spin_3s_linear_infinite] overflow-hidden">
+      <div class="absolute w-full h-1.5 bg-omni-main rotate-45"></div>
+      <div class="absolute w-full h-1.5 bg-omni-main -rotate-45"></div>
+      <div class="absolute inset-3 bg-[#030303] rounded-full z-10 border-[3px] border-omni-main"></div>
+    </div>
+    <div class="font-mono text-sm tracking-[0.3em] text-white">INITIALIZING SYSTEM</div>
+    <div class="font-mono text-xs text-omni-main mt-2 animate-pulse glow-text">LOADING KARTIKAY_S PROFILE...</div>
+  </div>
+
+  <div id="omni-hud-overlay">
+    <div class="relative w-24 h-24 rounded-full border-[5px] border-cyan-500 mb-8 shadow-[0_0_40px_rgba(6,182,212,0.8)] flex items-center justify-center animate-[spin_1s_linear_infinite] overflow-hidden">
+      <div class="absolute w-full h-2 bg-cyan-500 rotate-45"></div>
+      <div class="absolute w-full h-2 bg-cyan-500 -rotate-45"></div>
+      <div class="absolute inset-3 bg-[#030303] rounded-full z-10 border-[3px] border-cyan-500"></div>
+    </div>
+    <div class="font-mono text-2xl tracking-[0.4em] text-cyan-400 mb-2 animate-pulse glow-text">SYSTEM OVERRIDE</div>
+    <div class="font-mono text-sm text-cyan-500/80 tracking-widest">XLR8 MODE ENGAGED...</div>
+    <div class="absolute bottom-10 font-mono text-xs text-cyan-500 animate-bounce glow-text">REROUTING TIMELINE PROTOCOLS</div>
+    
+    <div class="absolute top-4 left-4 w-16 h-16 border-t-4 border-l-4 border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+    <div class="absolute top-4 right-4 w-16 h-16 border-t-4 border-r-4 border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+    <div class="absolute bottom-4 left-4 w-16 h-16 border-b-4 border-l-4 border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+    <div class="absolute bottom-4 right-4 w-16 h-16 border-b-4 border-r-4 border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+  </div>
+  <div id="hud-flash"></div>
+
+  <div id="cursor-ring" class="hidden md:block"></div>
+  <div id="cursor-dot" class="hidden md:block"></div>
+
+  <!-- TRUE 3D PARALLAX BACKGROUND -->
+  <!-- Interactive Data Stream Canvas -->
+  <canvas id="data-stream-canvas" class="fixed inset-0 z-[-20] pointer-events-none opacity-40 dark:opacity-80"></canvas>
+  <div class="bg-grid hidden"></div>
+  <canvas id="river-canvas"></canvas>
+
+  <button id="scroll-top-btn" class="fixed bottom-8 right-8 z-40 w-12 h-12 flex items-center justify-center opacity-0 translate-y-4 pointer-events-none transition-all duration-500 interactive group bg-transparent">
+    <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 omni-border transition-all duration-300 group-hover:w-full group-hover:h-full group-hover:opacity-30 group-hover:bg-omni-main"></div>
+    <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 omni-border transition-all duration-300 group-hover:w-full group-hover:h-full group-hover:opacity-30 group-hover:bg-omni-main"></div>
+    <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 omni-border transition-all duration-300 group-hover:w-full group-hover:h-full group-hover:opacity-30 group-hover:bg-omni-main"></div>
+    <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 omni-border transition-all duration-300 group-hover:w-full group-hover:h-full group-hover:opacity-30 group-hover:bg-omni-main"></div>
+    <i class="ph ph-arrow-up omni-text text-xl group-hover:-translate-y-1 transition-transform z-10"></i>
+  </button>
+
+  <nav class="fixed top-0 w-full z-50 glass-nav transition-colors duration-500" id="main-nav">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="font-display text-2xl font-bold text-black dark:text-white flex items-center gap-2 interactive">
+        <i class="ph ph-hexagon omni-text"></i> KS.
+      </a>
+      
+      <div class="hidden md:flex items-center gap-8 font-mono text-sm tracking-widest uppercase text-neutral-500 dark:text-neutral-400">
+        <a href="#about" class="nav-link hover:text-black dark:hover:text-white transition-colors interactive">About</a>
+        <a href="#projects" class="nav-link hover:text-black dark:hover:text-white transition-colors interactive">Projects</a>
+        <a href="#certifications" class="nav-link hover:text-black dark:hover:text-white transition-colors interactive">Vault</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+
+        <button id="color-toggle" class="p-2 omni-text hover:opacity-80 transition-opacity interactive flex items-center gap-2">
+          <i class="ph ph-aperture text-xl"></i>
+        </button>
+        <a href="Kartikay_Srivastava_SDE_Resume.pdf" target="_blank" class="hidden md:flex px-5 py-2 border-2 omni-border text-black dark:text-white font-mono text-xs tracking-widest uppercase hover:bg-omni-main hover:text-black transition-all interactive">
+          Resume
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="relative z-10 pt-32 pb-24" id="main-content">
+    
+    <section id="about" class="min-h-[80vh] flex flex-col justify-center items-center text-center px-6 reveal max-w-4xl mx-auto">
+      <div class="zero-g-1">
+        <div class="spatial-float relative mb-10 interactive group">
+          <div class="absolute inset-0 bg-omni-main opacity-20 blur-2xl rounded-full scale-110 group-hover:opacity-40 transition-opacity"></div>
+          <div class="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-2 omni-border relative z-10 p-1 bg-white dark:bg-black">
+            <img src="1777716468545.png" alt="Kartikay Srivastava" class="w-full h-full object-cover rounded-full transition-all duration-500">
+          </div>
+        </div>
+      </div>
+
+      <div class="zero-g-2">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-omni-dim omni-border border rounded-full font-mono text-xs omni-text mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full omni-bg opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 omni-bg"></span>
+          </span>
+          OPEN TO INTERNSHIPS & FULL-TIME ROLES
+        </div>
+      </div>
+      
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] 2xl:text-[9.5rem] font-bold tracking-tighter mb-6 xl:mb-12 text-black dark:text-white zero-g-3 transition-all duration-300">
+        Kartikay Srivastava
+      </h1>
+      
+      <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl xl:max-w-4xl 2xl:max-w-5xl text-lg md:text-xl xl:text-3xl 2xl:text-4xl mb-10 xl:mb-16 leading-relaxed font-light zero-g-4 transition-all duration-300">
+        Computer Science undergraduate specializing in AI & ML. I build <strong class="text-black dark:text-white font-medium">backend systems</strong>, real-time infrastructure, and scalable AI-native products using Node.js, Python, and PostgreSQL.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 font-mono text-sm zero-g-1">
+        <button id="view-journey-btn" class="flex items-center gap-2 px-8 py-4 omni-bg text-black font-bold uppercase tracking-widest interactive shadow-[0_0_20px_var(--omni-glow)] hover:scale-105 transition-transform rounded-full">
+          View My Journey <i class="ph ph-arrow-down"></i>
+        </button>
+        <div class="flex flex-wrap justify-center gap-2">
+          <a href="https://github.com/KartikaySr" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-github-logo text-xl"></i></a>
+          <a href="https://linkedin.com/in/kartikaysr" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-linkedin-logo text-xl"></i></a>
+          <a href="https://leetcode.com/u/calipercarousel/" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-code text-xl"></i></a>
+          <a href="https://x.com/kartikay_sriv" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-x-logo text-xl"></i></a>
+          <a href="https://www.youtube.com/@Kartikay-n2w" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-youtube-logo text-xl"></i></a>
+          <a href="https://www.instagram.com/mindineers/" target="_blank" class="flex items-center justify-center w-12 h-12 border border-neutral-300 dark:border-neutral-700 text-black dark:text-white hover:omni-border hover:omni-text transition-colors interactive rounded-full"><i class="ph ph-instagram-logo text-xl"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-16 xl:mt-24 mb-32 reveal px-6 max-w-4xl xl:max-w-6xl mx-auto">
+      <div class="zero-g-2">
+         <div class="spatial-float glass-card rounded-[2rem] overflow-hidden shadow-2xl interactive border border-[#38e26a]/30 relative group">
+          <div class="bg-black/80 px-4 py-3 flex items-center gap-2 border-b border-[#38e26a]/30">
+            <div class="w-3 h-3 rounded-full bg-black border border-[#38e26a]/50"></div>
+            <div class="w-3 h-3 rounded-full bg-[#38e26a]/20"></div>
+            <div class="w-3 h-3 rounded-full bg-[#38e26a] shadow-[0_0_8px_#38e26a]"></div>
+            <span class="ml-4 text-[11px] font-mono text-[#38e26a] tracking-widest flex items-center gap-2 uppercase">
+              <i class="ph ph-aperture animate-spin-slow"></i> AI.AGENT.CORE
+            </span>
+          </div>
+          
+          <div class="flex flex-col md:flex-row h-[400px]">
+            <!-- Omnitrix/Pokedex Core -->
+            <div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-[#38e26a]/20 bg-[#050505]/80 flex flex-col items-center justify-center p-6 relative">
+              <div id="ai-eye-container" class="w-32 h-32 rounded-full border-4 border-[#38e26a]/20 flex items-center justify-center relative shadow-[0_0_50px_rgba(56,226,106,0.1)] transition-all duration-500">
+                <div class="w-24 h-24 rounded-full border border-[#38e26a]/50 flex items-center justify-center relative overflow-hidden bg-black">
+                   <div id="ai-eye-pupil" class="w-12 h-12 rounded-full bg-[#38e26a] shadow-[0_0_20px_#38e26a] transition-all duration-200"></div>
+                </div>
+                <div id="ai-pulse" class="absolute inset-0 rounded-full border-2 border-[#38e26a] opacity-0"></div>
+              </div>
+              <div class="mt-8 font-mono text-[10px] text-[#38e26a]/70 tracking-widest text-center uppercase">
+                Status: <span id="ai-status" class="text-[#38e26a]">Awaiting Query</span><br>
+                Model: LLaMA-3<br>
+                Uplink: Secure
+              </div>
+            </div>
+
+            <!-- Terminal Interface -->
+            <div class="w-full md:w-2/3 flex flex-col p-6 bg-[#000000]/90">
+              <div id="terminal-body" class="flex-1 overflow-y-auto custom-scrollbar font-mono text-[13px] leading-relaxed text-[#38e26a] flex flex-col space-y-4 mb-4" onclick="document.getElementById('terminal-input').focus()">
+                <div id="terminal-output" class="flex-grow space-y-2 opacity-90" style="text-shadow: 0 0 5px rgba(56,226,106,0.5);">
+                   <div>> KS.SYS v2.0 Initialized.</div>
+                   <div>> Neural link established. How can I assist you today?</div>
+                </div>
+              </div>
+
+              <!-- Suggestion Chips -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <button class="ai-chip text-[10px] uppercase tracking-widest font-mono border border-[#38e26a]/50 text-[#38e26a] px-3 py-1.5 rounded-sm hover:bg-[#38e26a]/20 hover:shadow-[0_0_10px_rgba(56,226,106,0.3)] transition-all" onclick="submitAIPrompt('Who is Kartikay?')">Who is Kartikay?</button>
+                <button class="ai-chip text-[10px] uppercase tracking-widest font-mono border border-[#38e26a]/50 text-[#38e26a] px-3 py-1.5 rounded-sm hover:bg-[#38e26a]/20 hover:shadow-[0_0_10px_rgba(56,226,106,0.3)] transition-all" onclick="submitAIPrompt('What is his tech stack?')">Tech Stack?</button>
+                <button class="ai-chip text-[10px] uppercase tracking-widest font-mono border border-[#38e26a]/50 text-[#38e26a] px-3 py-1.5 rounded-sm hover:bg-[#38e26a]/20 hover:shadow-[0_0_10px_rgba(56,226,106,0.3)] transition-all" onclick="submitAIPrompt('Top projects?')">Top Projects?</button>
+              </div>
+
+              <div class="flex items-center gap-3 border-t border-[#38e26a]/30 pt-4">
+                <span class="text-[#38e26a] font-bold text-lg">></span>
+                <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-grow text-[#38e26a] font-mono placeholder:text-[#38e26a]/30" placeholder="Ask the AI agent..." autocomplete="off" spellcheck="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="w-full mb-20 reveal px-6 max-w-6xl xl:max-w-[1400px] mx-auto">
+      <h3 class="font-mono text-neutral-400 dark:text-neutral-500 text-sm tracking-widest uppercase mb-12 xl:mb-20 flex items-center gap-4 zero-g-3 xl:text-base">
+        <i class="ph ph-hard-drives omni-text text-xl"></i> Deployed Infrastructure
+        <span class="h-px bg-neutral-200 dark:bg-neutral-800 flex-grow"></span>
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-16">
+        
+        <div class="zero-g-1 h-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('aetherq')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">AetherQ</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+              <a href="https://aether-q-rag-based-document-t-git-080441-kartikay-sr-s-projects.vercel.app/" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase bg-green-500/20 text-green-500 border border-green-500/50 px-3 py-1 rounded-full hover:bg-green-500 hover:text-black transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP
+              </a>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">384-dim search</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Full-stack document retrieval integrating semantic vector search. Features structured REST APIs and authentication.</p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Node.js</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Next.js</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">pgvector</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="zero-g-2 h-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('fraud')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">Fraud Detection Core</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+               <a href="https://credit-card-fraud-detection-system-6vazsxh5qzydq6tevghvlk.streamlit.app/" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase bg-green-500/20 text-green-500 border border-green-500/50 px-3 py-1 rounded-full hover:bg-green-500 hover:text-black transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP
+              </a>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">95.16% ROC-AUC</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Ensemble ML fraud-detection system (XGBoost) delivered via FastAPI endpoints and real-time dashboard.</p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Python</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">XGBoost</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">FastAPI</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="zero-g-3 h-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('mindineers')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">MindineersOS</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+               <a href="https://github.com/KartikaySr/MindineersOS" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">150+ Plugins</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Modular full-stack platform using Bun and React 19, supporting real-time WebSocket updates and massive ecosystem integrations.</p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">TypeScript</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">React 19</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Bun</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="zero-g-4 h-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('riderouting')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">Ride Routing API</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+               <a href="https://github.com/KartikaySr/Full-Stack-Ride-Booking-Application" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">40% Less Latency</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Real-time routing backend using pure WebSockets for live driver/rider location tracking and geospatial queries.</p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Node.js</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">WebSockets</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="zero-g-1 h-full md:col-span-2 w-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer md:max-w-3xl md:mx-auto w-full" onclick="openProjectModal('codeambers')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">CodeAmbers</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+              <a href="https://github.com/KartikaySr/CodeAmbers" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
+              <span class="font-mono text-[10px] uppercase bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 font-bold px-3 py-1 rounded-full ml-auto border border-yellow-500/30">IN PROCESS</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">
+              A multi-agent AI operating system for software engineering — a collaborative workspace where specialized AI agents handle frontend, backend, and DevOps tasks natively in-browser.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Next.js</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Groq LLM</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Monaco</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Sandpack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-16 zero-g-3">
+        <a href="https://github.com/KartikaySr" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-neutral-900 dark:bg-[#0a0a0a] border border-neutral-300 dark:border-neutral-700 text-white dark:text-white font-mono text-sm tracking-widest uppercase rounded-full hover:scale-105 transition-all duration-300 interactive shadow-[0_0_30px_rgba(0,0,0,0.3)] dark:shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:omni-border hover:omni-text group">
+          <i class="ph ph-github-logo text-2xl group-hover:animate-bounce"></i> Explore More Repositories
+        </a>
+      </div>
+    </section>
+
+    <section id="certifications" class="w-full mb-32 reveal px-6 max-w-6xl xl:max-w-[1400px] mx-auto pt-20">
+      <h3 class="font-mono text-neutral-400 dark:text-neutral-500 text-sm tracking-widest uppercase mb-12 flex items-center gap-4 zero-g-2">
+        <i class="ph ph-certificate omni-text text-xl"></i> Licenses & Certifications
+        <span class="h-px bg-neutral-200 dark:bg-neutral-800 flex-grow"></span>
+      </h3>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
+        <!-- 1 -->
+        <div class="zero-g-1 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+            <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-shield-check text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">Generative AI Governance</h5><p class="text-xs text-neutral-500 font-mono">Udemy</p></div>
+          </div>
+          <a href="https://www.udemy.com/certificate/UC-2513247b-982c-4e01-aef0-17163fc722d7/" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 2 -->
+        <div class="zero-g-2 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+            <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-code text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">DSA with Java</h5><p class="text-xs text-neutral-500 font-mono">Apna College Alpha</p></div>
+          </div>
+          <a href="#" onclick="event.preventDefault(); openImageModal('dsa%20with%20java.pdf', true)" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 3 -->
+        <div class="zero-g-3 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+            <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-cloud text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">Google Cloud Foundations</h5><p class="text-xs text-neutral-500 font-mono">Google</p></div>
+          </div>
+          <a href="https://www.credly.com/badges/206b9d37-2efa-4140-8012-cd9d5553f2ab/linked_in_profile" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 4 -->
+        <div class="zero-g-4 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+            <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-brain text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">Neural Networks & Deep Learning</h5><p class="text-xs text-neutral-500 font-mono">Samatrix Consulting</p></div>
+          </div>
+          <a href="https://verify.netcredential.com/roy8B3pzRI" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 5 -->
+        <div class="zero-g-1 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+             <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-text-t text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">NLP Prep using spaCy</h5><p class="text-xs text-neutral-500 font-mono">Udemy</p></div>
+          </div>
+          <a href="https://www.udemy.com/certificate/UC-cde8b85b-0289-44f4-8a14-c74b90829fa8/" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 6 -->
+        <div class="zero-g-2 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+             <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-cpu text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">Deep Learning with Python</h5><p class="text-xs text-neutral-500 font-mono">Samatrix Consulting</p></div>
+          </div>
+          <a href="https://verify.netcredential.com/roy8augy5D" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+        
+        <!-- 7 -->
+        <div class="zero-g-3 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+             <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-chart-line-up text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">Probabilistic Modelling</h5><p class="text-xs text-neutral-500 font-mono">Samatrix Consulting</p></div>
+          </div>
+          <a href="https://verify.netcredential.com/roy8EVB0a4" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+
+        <!-- 8 -->
+        <div class="zero-g-4 h-full"><div class="glass-card p-6 rounded-3xl flex flex-col h-full spatial-float interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="flex items-start gap-4 mb-6 flex-grow">
+             <div class="p-3 bg-neutral-100 dark:bg-[#111] rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 group-hover:omni-text group-hover:omni-border transition-colors"><i class="ph ph-laptop text-xl"></i></div>
+            <div><h5 class="font-bold text-black dark:text-white leading-tight mb-1">BitbyBit 48hr Hackathon</h5><p class="text-xs text-neutral-500 font-mono">Cognizance, IIT Roorkee</p></div>
+          </div>
+          <a href="#" onclick="event.preventDefault(); openImageModal('bit%20by%20bit%2048%20hr%20hackathon.jpeg', false)" class="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl font-mono text-xs text-neutral-500 group-hover:shadow-[0_0_15px_rgba(56,226,106,0.4)] group-hover:border-[#38e26a] group-hover:text-[#38e26a] transition-all interactive drop-shadow-none group-hover:drop-shadow-[0_0_10px_rgba(56,226,106,0.8)]">View Credential <i class="ph ph-arrow-up-right"></i></a>
+        </div></div>
+      </div>
+      
+      <div class="mt-16 text-center zero-g-3">
+        <a href="https://drive.google.com/drive/u/0/folders/18k427YHsckEsDds7TT8ODEnrrtk_cVJX" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-300 dark:border-neutral-700 text-black dark:text-white font-mono text-sm tracking-widest uppercase hover:omni-text hover:omni-border transition-all interactive shadow-lg hover:shadow-[0_0_30px_var(--omni-glow)] rounded-full group">
+          <i class="ph ph-folder-open text-2xl group-hover:animate-pulse"></i> Access Full Credential Vault
+        </a>
+      </div>
+    </section>
+
+    <section class="w-full mb-12 reveal px-6 max-w-5xl mx-auto flex flex-col gap-12">
+      
+      <div class="zero-g-1 w-full">
+        <div class="glass-card p-10 md:p-16 rounded-[3.5rem] relative spatial-float w-full flex flex-col items-center interactive group shadow-[0_0_50px_rgba(6,182,212,0.15)] dark:shadow-[0_0_50px_rgba(6,182,212,0.3)] border-cyan-500/30 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-cyan-900/10 to-blue-900/10 blur-3xl -z-10"></div>
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          
+          <div class="font-mono text-sm text-neutral-500 tracking-widest flex items-center gap-2 mb-8 self-start">
+            <i class="ph ph-terminal text-sm omni-text"></i> CLASSIC_NOKIA_MODULE.EXE 
+            <span class="text-[10px] bg-neutral-200 dark:bg-neutral-800 text-black dark:text-white px-3 py-1 rounded-full ml-2">LVL <span id="snake-level-badge">1</span>/5</span>
+          </div>
+          
+          <div class="w-full max-w-[400px] aspect-square bg-[#879E66] border-4 border-neutral-300 dark:border-[#111] rounded-xl relative overflow-hidden flex flex-col shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]">
+            <div class="flex justify-between items-center px-4 py-2 border-b-2 border-[#43523d]/20 font-mono text-[12px] text-[#43523d] font-bold">
+              <span id="snake-score-display">SCR:0</span><span id="snake-hi-score">HI:120</span>
+            </div>
+            <div class="flex-grow relative">
+              <div id="snake-start-screen" class="absolute inset-0 flex flex-col items-center justify-center z-20 font-mono text-center text-[#43523d]">
+                <h3 class="text-3xl font-bold mb-2 tracking-widest">SNAKE</h3>
+                <p class="text-[10px] font-bold mb-6">CLEAR LVL 5 TO UNLOCK COMMS.</p>
+                <p class="text-sm font-bold animate-pulse">PRESS START</p>
+              </div>
+              <div id="snake-game-over" class="absolute inset-0 flex-col items-center justify-center z-30 font-mono text-center bg-[#879E66]/95 text-[#43523d] hidden">
+                <p class="text-2xl font-bold mb-2">FAILURE</p>
+                <p class="text-sm font-bold" id="snake-final-score">SCORE: 0</p>
+              </div>
+              <div id="snake-win-screen" class="absolute inset-0 flex-col items-center justify-center z-30 font-mono text-center bg-[#879E66]/95 text-[#43523d] hidden p-4">
+                <i class="ph ph-lock-key-open text-5xl mb-4 animate-pulse"></i>
+                <p class="text-lg font-bold mb-2">ACCESS GRANTED</p>
+                <p class="text-[10px] font-bold mb-2">REDIRECTING TO SECURE COMMS...</p>
+              </div>
+              <div id="snake-grid" class="w-full h-full relative opacity-40 transition-opacity duration-300 z-10" tabindex="0"></div>
+            </div>
+          </div>
+          <button id="snake-start-btn" class="mt-10 px-10 py-4 bg-neutral-900 dark:bg-[#0a0a0a] border border-neutral-700 text-white dark:text-white font-mono text-sm font-bold rounded-full hover:scale-105 transition-transform shadow-2xl hover:omni-border hover:omni-text">
+            START PROTOCOL
+          </button>
+
+          <!-- Mobile & Web Friendly On-Screen Controls -->
+          <div id="snake-controls" class="mt-8 flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity select-none touch-manipulation">
+            <button id="btn-up" class="w-14 h-14 bg-neutral-200 dark:bg-neutral-800 rounded-xl flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#38e26a] hover:text-black active:bg-[#38e26a] active:text-black transition-colors active:scale-90 shadow-md">
+              <i class="ph ph-caret-up text-3xl pointer-events-none"></i>
+            </button>
+            <div class="flex gap-2">
+              <button id="btn-left" class="w-14 h-14 bg-neutral-200 dark:bg-neutral-800 rounded-xl flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#38e26a] hover:text-black active:bg-[#38e26a] active:text-black transition-colors active:scale-90 shadow-md">
+                <i class="ph ph-caret-left text-3xl pointer-events-none"></i>
+              </button>
+              <button id="btn-down" class="w-14 h-14 bg-neutral-200 dark:bg-neutral-800 rounded-xl flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#38e26a] hover:text-black active:bg-[#38e26a] active:text-black transition-colors active:scale-90 shadow-md">
+                <i class="ph ph-caret-down text-3xl pointer-events-none"></i>
+              </button>
+              <button id="btn-right" class="w-14 h-14 bg-neutral-200 dark:bg-neutral-800 rounded-xl flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:bg-[#38e26a] hover:text-black active:bg-[#38e26a] active:text-black transition-colors active:scale-90 shadow-md">
+                <i class="ph ph-caret-right text-3xl pointer-events-none"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zero-g-2 w-full">
+        <div class="glass-card p-8 md:p-12 rounded-[3rem] relative spatial-float flex flex-col interactive group">
+          <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+          <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+          <div class="font-mono text-sm text-neutral-500 tracking-widest flex items-center gap-2 mb-8">
+            <i class="ph ph-shield-check text-sm omni-text"></i> SECURE_TRANSMISSION.EXE
+          </div>
+          <h3 class="font-display text-3xl font-bold text-black dark:text-white mb-2">Establish Contact</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-8 font-mono">Awaiting payload parameters...</p>
+          
+          <form class="flex flex-col gap-6 font-mono text-sm" id="contact-form">
+            <input id="sender-id-input" type="text" placeholder="SENDER_ID (Name)" class="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 py-3 focus:outline-none focus:omni-border transition-colors text-black dark:text-white placeholder:text-neutral-500" required>
+            <input id="return-node-input" type="email" placeholder="RETURN_NODE (Email)" class="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 py-3 focus:outline-none focus:omni-border transition-colors text-black dark:text-white placeholder:text-neutral-500" required>
+            <textarea id="payload-data-input" placeholder="PAYLOAD_DATA (Message)" rows="4" class="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 py-3 focus:outline-none focus:omni-border transition-colors text-black dark:text-white placeholder:text-neutral-500 resize-none" required></textarea>
+            <button id="transmit-btn" type="button" onclick="submitContactForm()" class="mt-4 w-full py-4 omni-bg text-black font-bold uppercase tracking-widest interactive shadow-[0_0_20px_var(--omni-glow)] hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 rounded-full">
+              Transmit <i class="ph ph-paper-plane-tilt"></i>
+            </button>
+            <div id="transmit-status" class="text-xs text-center mt-2 hidden"></div>
+          </form>
+
+          <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col items-center w-full">
+             <p class="font-mono text-xs text-neutral-500 tracking-widest mb-6">ALTERNATIVE_COMMS_LINKS</p>
+             <div class="flex gap-6">
+                <a href="https://x.com/kartikay_sriv" target="_blank" class="w-14 h-14 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-black dark:text-white hover:omni-text hover:omni-border bg-neutral-100 dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_25px_var(--omni-glow)] transition-all interactive hover:-translate-y-1">
+                  <i class="ph ph-x-logo text-2xl"></i>
+                </a>
+                <a href="https://www.youtube.com/@Kartikay-n2w" target="_blank" class="w-14 h-14 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-black dark:text-white hover:omni-text hover:omni-border bg-neutral-100 dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_25px_var(--omni-glow)] transition-all interactive hover:-translate-y-1">
+                  <i class="ph ph-youtube-logo text-2xl"></i>
+                </a>
+                <a href="https://www.instagram.com/mindineers/" target="_blank" class="w-14 h-14 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-black dark:text-white hover:omni-text hover:omni-border bg-neutral-100 dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_25px_var(--omni-glow)] transition-all interactive hover:-translate-y-1">
+                  <i class="ph ph-instagram-logo text-2xl"></i>
+                </a>
+             </div>
+
+             <a href="https://linkedin.com/in/kartikaysr/" target="_blank" class="mt-8 w-full group relative flex items-center justify-center gap-3 px-6 py-4 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-300 dark:border-neutral-700 rounded-2xl hover:omni-border transition-all duration-300 interactive shadow-lg hover:shadow-[0_0_30px_var(--omni-glow)] overflow-hidden">
+               <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-omni-main/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1.5s] ease-in-out"></div>
+               <i class="ph ph-linkedin-logo text-2xl text-neutral-500 group-hover:omni-text transition-colors z-10"></i>
+               <span class="font-display font-bold text-black dark:text-white tracking-wide group-hover:omni-text transition-colors z-10">Let's build the future together</span>
+               <i class="ph ph-arrow-right text-neutral-500 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:omni-text transition-all duration-300 z-10 absolute right-6"></i>
+             </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="border-t border-neutral-200 dark:border-white/10 bg-transparent pt-12 pb-8 text-center font-mono text-xs text-neutral-500 reveal relative z-10">
+     <div class="flex flex-wrap justify-center items-center gap-6 mb-8">
+       <a href="https://github.com/KartikaySr" target="_blank" class="hover:text-black dark:hover:text-white transition-colors interactive">GITHUB</a>
+       <a href="https://linkedin.com/in/kartikaysr/" target="_blank" class="hover:omni-text transition-colors interactive">LINKEDIN</a>
+       <a href="https://leetcode.com/u/calipercarousel/" target="_blank" class="hover:omni-text transition-colors interactive">LEETCODE</a>
+       <a href="https://x.com/kartikay_sriv" target="_blank" class="hover:omni-text transition-colors interactive">X / TWITTER</a>
+       <a href="https://www.youtube.com/@Kartikay-n2w" target="_blank" class="hover:omni-text transition-colors interactive">YOUTUBE</a>
+       <a href="https://www.instagram.com/mindineers/" target="_blank" class="hover:omni-text transition-colors interactive">INSTAGRAM</a>
+     </div>
+     <div class="mb-6 font-display italic text-sm md:text-base tracking-wide">
+       <span class="glitter-quote interactive">"The best way to predict the future is to invent it."</span>
+     </div>
+     <p>KS.SYS // INITIALIZED BY KARTIKAY SRIVASTAVA</p>
+  </footer>
+
+  <div id="project-modal-backdrop">
+    <div class="modal-content w-full p-8 md:p-12 relative flex flex-col font-sans">
+      <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-neutral-400 hover:text-white transition-colors interactive">
+        <i class="ph ph-x text-2xl"></i>
+      </button>
+      <div class="font-mono text-sm tracking-widest text-neutral-500 mb-2 flex items-center gap-2">
+        <i class="ph ph-hard-drive omni-text"></i> <span id="modal-subtitle"></span>
+      </div>
+      <h3 id="modal-title" class="font-display text-3xl md:text-5xl font-bold text-white mb-8 border-b border-white/10 pb-6 shadow-[0_20px_40px_-20px_var(--omni-glow)]"></h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-neutral-300 text-sm md:text-base leading-relaxed">
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4 flex items-center gap-2"><i class="ph ph-warning-circle text-white"></i> The Problem & Context</h4>
+          <div id="modal-problem" class="space-y-4"></div>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4 flex items-center gap-2"><i class="ph ph-blueprint text-white"></i> Architecture & Deep Dive</h4>
+          <div id="modal-arch" class="space-y-4"></div>
+        </div>
+      </div>
+      <div id="modal-actions" class="mt-10 pt-6 border-t border-white/10 flex gap-4"></div>
+    </div>
+  </div>
+
+  <div id="image-modal-backdrop" class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 transition-opacity duration-300 opacity-0 pointer-events-none" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
+    <div class="modal-content max-w-5xl w-full h-full max-h-[90vh] relative flex flex-col items-center justify-center transform scale-95 transition-transform duration-300">
+      <button onclick="closeImageModal()" class="fixed top-4 right-4 md:top-8 md:right-8 text-white hover:text-cyan-400 transition-colors interactive text-3xl z-[110] bg-black/60 w-12 h-12 flex items-center justify-center rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+        <i class="ph ph-x"></i>
+      </button>
+      <div id="image-modal-container" class="w-full h-full flex items-center justify-center rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.15)] bg-black/40 border border-white/10">
+        <!-- Image or iframe injected here -->
+      </div>
+    </div>
+  </div>
+
+  <div id="overdrive-landing" class="font-sans text-white preserve-3d">
+    <canvas id="warp-canvas"></canvas>
+    <div class="fixed top-0 w-full bg-black/80 backdrop-blur-md border-b border-cyan-900 z-50 p-6 flex justify-between items-center shadow-[0_0_30px_rgba(6,182,212,0.2)]">
+      <div class="font-mono text-sm text-cyan-500 flex items-center gap-2">
+        <i class="ph ph-lightning animate-pulse"></i> KS.SYS // OVERDRIVE_ACTIVE
+      </div>
+      <button onclick="returnToMainSystem()" class="font-mono text-xs bg-cyan-950 border border-cyan-500 text-cyan-400 px-4 py-2 hover:bg-cyan-900 transition-colors flex items-center gap-2 interactive rounded-full">
+        <i class="ph ph-arrow-left"></i> Return to Main System
+      </button>
+    </div>
+
+    <div class="max-w-5xl xl:max-w-7xl mx-auto pt-32 pb-32 px-6 relative">
+      
+      <!-- HERO SECTION -->
+      <div class="text-center mb-32 relative z-10 glass-card p-10 md:p-16 rounded-3xl spatial-float border-cyan-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 glow-text leading-tight">
+          Architecting Systems.<br><span class="text-cyan-400">Empowering Communities.</span><br>Exploring the World.
+        </h1>
+        <p class="font-mono text-cyan-500 mb-10 tracking-widest max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
+          I am Kartikay Srivastava, a student at JECRC University and a Software Engineer passionate about the intersection of data, entrepreneurship, and human-centric design.
+        </p>
+        <blockquote class="text-neutral-300 text-lg md:text-xl italic border-l-4 border-cyan-500 pl-6 text-left max-w-4xl mx-auto mb-12">
+          "From local hackathons to global logistics in Nairobi, my journey is driven by a singular mission: to build resilient systems—both in code and in the communities I serve. Welcome to the milestones, the chaos, and the deep dives that have shaped my path."
+        </blockquote>
+        <button onclick="document.getElementById('chapter-1').scrollIntoView({behavior: 'smooth'})" class="font-mono text-sm bg-cyan-950 border border-cyan-500 text-cyan-400 px-8 py-4 hover:bg-cyan-900 transition-colors inline-flex items-center gap-3 interactive rounded-full shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105">
+          Explore the Journey <i class="ph ph-arrow-down animate-bounce"></i>
+        </button>
+      </div>
+
+      <!-- TIMELINE LINE -->
+      <div class="absolute left-1/2 top-[700px] bottom-64 w-0.5 bg-gradient-to-b from-cyan-400 via-cyan-900 to-transparent transform -translate-x-1/2 hidden md:block shadow-[0_0_15px_#06b6d4]"></div>
+
+      <div class="space-y-32">
+        
+        <!-- CHAPTER 1 -->
+        <div id="chapter-1" class="flex flex-col md:flex-row justify-between items-center relative w-full pt-10">
+          <div class="timeline-card md:mr-auto mb-8 md:mb-0 glass-card spatial-float p-8 md:p-12 rounded-3xl border border-cyan-500/30">
+            <span class="font-mono text-xs text-cyan-500 mb-2 block tracking-widest">CHAPTER 1</span>
+            <h4 class="font-display text-3xl md:text-4xl font-bold mb-4 text-white">The Incubation Ecosystem</h4>
+            <h5 class="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4">Cultivating Innovation & Leadership</h5>
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6">Growth doesn't happen in a vacuum. It happens in the crucible of collaboration. My foundational years have been defined by stepping up as an advocate for early-stage innovation.</p>
+            <ul class="space-y-4 text-sm md:text-base text-neutral-400 mb-6">
+              <li class="flex items-start gap-3"><i class="ph ph-check-circle text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">JECRC Incubation Centre (JIC):</strong> Serving on the Core Team and as an Ambassador, I’ve had the privilege of fostering a vibrant startup ecosystem, working alongside visionary leaders to empower the next generation of entrepreneurs.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-check-circle text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">IIT Bombay E-Cell Ambassador:</strong> Championing the spirit of innovation at a national level, helping to bridge the gap between fragmented ideas and real-world execution.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-check-circle text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Encounters with Visionaries:</strong> Engaging with luminaries like Mr. Shantanu Naidu and visionary founders has reinforced my belief in the transformative power of education, social entrepreneurship, and building with purpose.</span></li>
+            </ul>
+            <blockquote class="border-l-2 border-cyan-500/50 pl-4 text-neutral-300 italic text-sm md:text-base bg-cyan-950/20 py-2 pr-2 rounded-r-lg">"A great leader is the wick of a candle—holding the light while slowly burning." <br><span class="text-cyan-600 text-xs mt-2 block not-italic font-mono uppercase tracking-widest">— A lesson in silent momentum</span></blockquote>
+          </div>
+          <div class="timeline-node hidden md:block"></div>
+          <div class="w-full md:w-[45%]"></div>
+        </div>
+
+        <!-- CHAPTER 2 -->
+        <div class="flex flex-col md:flex-row justify-between items-center relative w-full">
+          <div class="w-full md:w-[45%] hidden md:block"></div>
+          <div class="timeline-node hidden md:block"></div>
+          <div class="timeline-card md:ml-auto glass-card spatial-float p-8 md:p-12 rounded-3xl border border-cyan-500/30">
+            <span class="font-mono text-xs text-cyan-500 mb-2 block tracking-widest">CHAPTER 2</span>
+            <h4 class="font-display text-3xl md:text-4xl font-bold mb-4 text-white">The Builder's Crucible</h4>
+            <h5 class="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4">Architecting Under Pressure</h5>
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6">There is a unique magic in a 36-hour sprint. It tests not just your coding skills, but your resilience, strategy, and ability to turn complex ideas into tangible realities. I thrive in this high-stakes environment.</p>
+            <ul class="space-y-4 text-sm md:text-base text-neutral-400">
+              <li class="flex items-start gap-3"><i class="ph ph-code text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Smart India Hackathon 2024:</strong> Collaborated with a dedicated team to architect an AI-powered "Personalized Career & Education Advisor," utilizing multi-lingual support and an API engine for data-driven recommendations.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-code text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Cognizance '25 (IIT Roorkee):</strong> Pushed the boundaries of problem-solving by building sustainable tech UIs (APPROVA) and executing rapid front-end reconstruction (SNAP-SYNTAX).</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-code text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Deploying Aether0:</strong> Realizing that data engineering is fundamentally a digital supply chain. I developed Aether0, an AI-powered document analysis engine handling modular components, shifting from cloud dependencies to robust, locally deployed Docker environments.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CHAPTER 3 -->
+        <div class="flex flex-col md:flex-row justify-between items-center relative w-full">
+          <div class="timeline-card md:mr-auto mb-8 md:mb-0 glass-card spatial-float p-8 md:p-12 rounded-3xl border border-cyan-500/30">
+            <span class="font-mono text-xs text-cyan-500 mb-2 block tracking-widest">CHAPTER 3</span>
+            <h4 class="font-display text-3xl md:text-4xl font-bold mb-4 text-white">Global Immersion</h4>
+            <h5 class="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4">Strategic Logistics in Nairobi, Kenya</h5>
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6">To truly understand systems, you must see them operate at scale. My strategic immersion in Nairobi expanded my perspective far beyond the terminal window.</p>
+            <ul class="space-y-4 text-sm md:text-base text-neutral-400">
+              <li class="flex items-start gap-3"><i class="ph ph-globe-hemisphere-east text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Fracht Group - Kenya Ltd.:</strong> Immersed in the beating heart of logistics, I learned that supply chains are driven by human coordination, foresight, and trust. I witnessed leadership that prioritizes clarity over chaos.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-globe-hemisphere-east text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Global Exhibitions (KICC):</strong> Explored the frontiers of the future at BUILDEXPO, COMPLAST, and the Solar Exhibition. Witnessed firsthand how emerging markets are leapfrogging legacy systems to build a resilient, green future.</span></li>
+            </ul>
+          </div>
+          <div class="timeline-node hidden md:block"></div>
+          <div class="w-full md:w-[45%]"></div>
+        </div>
+
+        <!-- CHAPTER 4 -->
+        <div class="flex flex-col md:flex-row justify-between items-center relative w-full">
+          <div class="w-full md:w-[45%] hidden md:block"></div>
+          <div class="timeline-node hidden md:block"></div>
+          <div class="timeline-card md:ml-auto glass-card spatial-float p-8 md:p-12 rounded-3xl border border-cyan-500/30">
+            <span class="font-mono text-xs text-cyan-500 mb-2 block tracking-widest">CHAPTER 4</span>
+            <h4 class="font-display text-3xl md:text-4xl font-bold mb-4 text-white">The Mind Behind the Machine</h4>
+            <h5 class="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4">Navigating Chaos & Deep Dives</h5>
+            <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6">In a hyper-connected world, the most rebellious act is to slow down. True engineering requires not just technical prowess, but mental clarity and contextual understanding.</p>
+            <ul class="space-y-4 text-sm md:text-base text-neutral-400">
+              <li class="flex items-start gap-3"><i class="ph ph-brain text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">The Framework for Chaos:</strong> When deadlines stack up, I rely on a simple architecture for action: <em class="text-cyan-300">Sort, Shrink, Solve.</em> Structured action beats overthinking.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-brain text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Beyond the Headlines:</strong> I believe in the power of deep dives. Carving out time for physical newspapers and silent reading sessions allows me to deconstruct the noise, gain historical context, and sharpen critical thinking.</span></li>
+              <li class="flex items-start gap-3"><i class="ph ph-brain text-cyan-500 mt-1 flex-shrink-0 text-lg"></i> <span><strong class="text-white">Advocating for Mental Health:</strong> I actively explore and speak about the hidden cycles of procrastination and stress in high-stakes tech environments, championing mindfulness, better workflows, and empathy in engineering.</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- FOOTER CTA -->
+      <div class="mt-32 text-center glass-card p-12 rounded-3xl border border-cyan-500/20 spatial-float relative z-10 bg-black/40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6 glow-text">Let's Build the Future Together</h2>
+        <p class="text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed md:text-lg">
+          Whether it's designing scalable data pipelines, nurturing a startup ecosystem, or discussing the next big leap in AI and sustainability—I'm always ready for a great conversation.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+          <a href="https://linkedin.com/in/kartikaysr" target="_blank" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-linkedin-logo text-2xl"></i>
+          </a>
+          <a href="https://github.com/KartikaySr" target="_blank" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-github-logo text-2xl"></i>
+          </a>
+          <a href="https://x.com/kartikay_sriv" target="_blank" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-x-logo text-2xl"></i>
+          </a>
+          <a href="https://www.youtube.com/@Kartikay-n2w" target="_blank" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-youtube-logo text-2xl"></i>
+          </a>
+          <a href="https://www.instagram.com/mindineers/" target="_blank" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-instagram-logo text-2xl"></i>
+          </a>
+          <a href="mailto:kartikaysrivastava57@gmail.com" class="flex items-center justify-center w-14 h-14 bg-cyan-950/50 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all rounded-full hover:scale-110 shadow-[0_0_15px_rgba(6,182,212,0.3)] interactive">
+            <i class="ph ph-envelope text-2xl"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="system-reboot-overlay" class="fixed inset-0 bg-black z-[100] hidden flex-col justify-center items-center text-cyan-400 font-mono transition-opacity duration-500 opacity-0">
+    <div class="max-w-3xl w-full px-8">
+      <div id="reboot-terminal" class="text-sm md:text-base leading-loose mb-8 h-40 overflow-hidden relative">
+        <div class="absolute bottom-0 w-full" id="reboot-lines"></div>
+      </div>
+      <div class="w-full h-1 bg-neutral-900 overflow-hidden relative rounded-full">
+        <div id="reboot-progress" class="h-full bg-cyan-400 w-0 shadow-[0_0_15px_#22d3ee] transition-all duration-75"></div>
+      </div>
+      <div class="flex justify-between text-xs mt-3 text-cyan-700">
+        <span>KS.SYS BIOS v2.0.4</span>
+        <span id="reboot-pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 3D Parallax Matrix Setup
+    const bgGrid = document.querySelector('.bg-grid');
+    window.addEventListener('mousemove', (e) => {
+      // Moves the background grid slightly opposite to the mouse for immense Z-depth
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      bgGrid.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    const scrollTopBtn = document.getElementById('scroll-top-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        scrollTopBtn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        scrollTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        scrollTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const bootScreen = document.getElementById('boot-screen');
+        bootScreen.style.opacity = '0';
+        setTimeout(() => bootScreen.style.display = 'none', 300);
+      }, 100); 
+    });
+
+    const htmlEl = document.documentElement;
+    const colorToggle = document.getElementById('color-toggle');
+
+    colorToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('theme-gold');
+    });
+
+    const cursorRing = document.getElementById('cursor-ring');
+    const cursorDot = document.getElementById('cursor-dot');
+    let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.2; ringY += (mouseY - ringY) * 0.2;
+      cursorRing.style.left = `${ringX}px`; cursorRing.style.top = `${ringY}px`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    revealElements.forEach(el => observer.observe(el));
+
+    // Enhanced Spatial Pop (translateZ combined with antigravity wrappers)
+    const tiltElements = document.querySelectorAll('.spatial-float');
+    tiltElements.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotateX = -(y / (rect.height / 2)) * 10; 
+        const rotateY = (x / (rect.width / 2)) * 10;
+        el.classList.remove('resetting');
+        // Pushes the card forward on hover for extreme 3D effect
+        el.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03) translateZ(30px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.classList.add('resetting');
+        el.style.transform = `perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1) translateZ(0px)`;
+      });
+    });
+
+    // Deep Space Starfield Expansion
+    const canvas = document.getElementById('river-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    const particles = [];
+
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    class Particle {
+      constructor() { this.reset(); this.z = Math.random() * 3000; } // Deeper Z axis
+      reset() {
+        this.x = (Math.random() - 0.5) * 3500; this.y = (Math.random() - 0.5) * 1500; 
+        this.z = 3000; this.speed = Math.random() * 2 + 0.5;
+      }
+      update() { this.z -= this.speed; if (this.z <= 1) this.reset(); }
+      draw(time) {
+        const fov = 350;
+        const waveX = Math.sin(this.z * 0.002 + time) * 400;
+        const waveY = Math.cos(this.z * 0.0015 + time) * 200;
+        const screenX = ((this.x + waveX) / this.z) * fov + width / 2;
+        const screenY = ((this.y + waveY) / this.z) * fov + height / 2;
+        const scale = fov / this.z;
+        const size = Math.max(0.5, scale * 3); // Slightly larger stars close up
+
+        let color = '#38e26a';
+        if(htmlEl.classList.contains('theme-gold')) color = '#e8b93e';
+        if(htmlEl.classList.contains('theme-blue')) color = '#22d3ee'; 
+
+        ctx.fillStyle = color;
+        ctx.globalAlpha = Math.min(1, scale * 2);
+        ctx.beginPath(); ctx.arc(screenX, screenY, size, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    for (let i = 0; i < 200; i++) particles.push(new Particle()); // Increased density
+    let time = 0;
+    function animateCanvas() {
+      ctx.clearRect(0, 0, width, height); time += 0.005; // Slower, deeper space rotation
+      particles.forEach(p => { p.update(); p.draw(time); });
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    const logsPool = [
+      { t: "Extracting skills mapping...", c: "text-neutral-500" },
+      { t: "[OK] Java, Python, TypeScript, SQL loaded.", c: "text-green-500" },
+      { t: "Compiling full-stack architecture...", c: "text-neutral-500" },
+      { t: "Warning: Caffeine levels running low.", c: "text-yellow-500" },
+      { t: "[EXEC] Deploying AetherQ RAG container...", c: "text-blue-500" },
+      { t: "[OK] pgvector embeddings synchronized.", c: "text-green-500" },
+      { t: "Running fraud detection pipeline...", c: "text-neutral-500" },
+      { t: "[INFO] Model precision: 98%. Recall: 91%.", c: "omni-text" },
+      { t: "Allocating GCP instances for MindineersOS...", c: "text-neutral-500" },
+      { t: "[OK] Microservices scaling up...", c: "text-green-500" },
+      { t: "Initializing WebSocket connections...", c: "text-neutral-500" },
+      { t: "[WARN] Optimization required in module: RideRouting", c: "text-yellow-500" },
+      { t: "[OK] Pathfinding cache hit ratio: 95%", c: "text-green-500" },
+      { t: "Syncing repositories from GitHub...", c: "text-neutral-500" },
+      { t: "[INFO] 500+ commits indexed.", c: "omni-text" },
+      { t: "Parsing resume object...", c: "text-blue-500" },
+      { t: "[OK] Education: Thapar Institute of Engineering.", c: "text-green-500" },
+      { t: "[OK] Major: Computer Science.", c: "text-green-500" },
+      { t: "Ping: Servers nominal. Latency: 12ms", c: "text-neutral-500" },
+      { t: "Fetching latest AI research papers...", c: "text-neutral-500" },
+      { t: "System Ready. Standing by for instructions.", c: "omni-text" }
+    ];
+
+    const terminalBody = document.getElementById('terminal-body');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalInput = document.getElementById('terminal-input');
+    const aiStatus = document.getElementById('ai-status');
+    const aiPulse = document.getElementById('ai-pulse');
+    const aiEyePupil = document.getElementById('ai-eye-pupil');
+    
+    function printTerminal(text, className = "text-[#38e26a]") {
+      const div = document.createElement('div');
+      div.className = `mb-1 ${className}`;
+      div.innerHTML = text; 
+      terminalOutput.appendChild(div);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+      return div;
+    }
+
+    async function typeText(element, text, speed = 20) {
+      element.innerHTML = '';
+      for (let i = 0; i < text.length; i++) {
+        element.innerHTML += text.charAt(i);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        await new Promise(r => setTimeout(r, speed));
+      }
+    }
+
+    window.submitAIPrompt = async function(promptText) {
+      if (!promptText) return;
+      
+      // User Message
+      printTerminal(`> ${promptText}`, "text-white");
+      terminalInput.value = '';
+      
+      // Loading State
+      aiStatus.innerText = "Processing...";
+      aiStatus.className = "text-yellow-400";
+      aiPulse.classList.replace("opacity-0", "animate-ping");
+      aiPulse.style.opacity = '1';
+      aiEyePupil.classList.replace("w-12", "w-16");
+      aiEyePupil.classList.replace("h-12", "h-16");
+      aiEyePupil.classList.replace("bg-[#38e26a]", "bg-yellow-400");
+      aiEyePupil.style.boxShadow = "0 0 30px #facc15";
+
+      const responseDiv = printTerminal(`> [KS.SYS]: `, "text-[#38e26a]");
+      
+      try {
+        // We use relative path so it routes via Vercel correctly
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: promptText })
+        });
+        
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        
+        // Success state
+        aiStatus.innerText = "Transmitting...";
+        aiStatus.className = "text-cyan-400";
+        aiEyePupil.classList.replace("bg-yellow-400", "bg-cyan-400");
+        aiEyePupil.style.boxShadow = "0 0 30px #22d3ee";
+
+        await typeText(responseDiv, `> [KS.SYS]: ${data.reply || data.error}`, 15);
+      } catch (err) {
+        responseDiv.innerHTML = `> [KS.SYS]: Connection to central core failed.`;
+        responseDiv.className = "text-red-500 mb-1";
+      } finally {
+        // Reset state
+        aiStatus.innerText = "Awaiting Query";
+        aiStatus.className = "text-[#38e26a]";
+        aiPulse.classList.replace("animate-ping", "opacity-0");
+        aiPulse.style.opacity = '0';
+        aiEyePupil.classList.remove("w-16", "h-16", "bg-yellow-400", "bg-cyan-400");
+        aiEyePupil.classList.add("w-12", "h-12", "bg-[#38e26a]");
+        aiEyePupil.style.boxShadow = "0 0 20px #38e26a";
+      }
+    };
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (isSnakePlaying && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) return;
+      if (e.key === 'Enter') {
+        const val = terminalInput.value.trim();
+        if(val.toLowerCase() === 'clear') {
+           terminalOutput.innerHTML = '';
+           terminalInput.value = '';
+        } else {
+           submitAIPrompt(val);
+        }
+      }
+    });
+
+    const journeyBtn = document.getElementById('view-journey-btn');
+    const hudOverlay = document.getElementById('omni-hud-overlay');
+    const hudFlash = document.getElementById('hud-flash');
+    const overdriveLanding = document.getElementById('overdrive-landing');
+    const mainNav = document.getElementById('main-nav');
+    const mainContent = document.getElementById('main-content');
+    
+    let previousTheme = '';
+    let previousDark = false;
+
+    journeyBtn.addEventListener('click', () => {
+      previousTheme = htmlEl.classList.contains('theme-gold') ? 'theme-gold' : '';
+      previousDark = htmlEl.classList.contains('dark');
+      
+      // Hyperdrive Fast Transition
+      hudFlash.style.display = 'block';
+      hudFlash.style.opacity = '1';
+      warpActive = true;
+      initWarp();
+      warpSpeed = 40; 
+      animateWarp();
+      
+      setTimeout(() => {
+        mainNav.style.display = 'none';
+        mainContent.style.display = 'none';
+        scrollTopBtn.style.display = 'none';
+        
+        htmlEl.classList.remove('theme-gold');
+        htmlEl.classList.add('theme-blue');
+        htmlEl.classList.add('dark'); 
+        
+        document.querySelector('footer').style.display = 'none';
+        overdriveLanding.classList.add('active');
+        
+        hudFlash.style.opacity = '0';
+        setTimeout(() => { hudFlash.style.display = 'none'; warpSpeed = 3; }, 300); // Slow down to cruise speed
+      }, 50); // Near instant transition
+    });
+
+    function returnToMainSystem() {
+       hudFlash.style.display = 'block';
+       hudFlash.style.opacity = '1';
+       warpSpeed = 80; // Warp out fast
+       
+       const overlay = document.getElementById('system-reboot-overlay');
+       const linesEl = document.getElementById('reboot-lines');
+       const progEl = document.getElementById('reboot-progress');
+       const pctEl = document.getElementById('reboot-pct');
+       
+       overlay.classList.remove('hidden');
+       
+       setTimeout(() => {
+          // Hide overdrive
+          warpActive = false;
+          overdriveLanding.classList.remove('active');
+          hudFlash.style.opacity = '0';
+          setTimeout(() => hudFlash.style.display = 'none', 300);
+          
+          // Fade in overlay
+          overlay.style.opacity = '1';
+          
+          // Terminal animation
+          linesEl.innerHTML = '';
+          progEl.style.width = '0%';
+          pctEl.innerText = '0%';
+          
+          const messages = [
+            'Dumping memory registers...',
+            'Re-routing power to main grid...',
+            'Restoring visual modules...',
+            'Synchronizing Reality Engine...',
+            'SYSTEM RESTORED.'
+          ];
+          
+          let pct = 0;
+          let msgIdx = 0;
+          
+          const bootInterval = setInterval(() => {
+            pct += Math.floor(Math.random() * 20) + 5;
+            if(pct >= 100) {
+              pct = 100;
+              clearInterval(bootInterval);
+              
+              setTimeout(() => {
+                overlay.style.opacity = '0';
+                
+                // Restore Main System elements precisely
+                mainNav.style.display = '';
+                mainContent.style.display = '';
+                scrollTopBtn.style.display = 'flex';
+                
+                htmlEl.classList.remove('theme-blue');
+                if(previousTheme === 'theme-gold') htmlEl.classList.add('theme-gold');
+                if(!previousDark) htmlEl.classList.remove('dark');
+                
+                document.querySelector('footer').style.display = 'block';
+                
+                setTimeout(() => overlay.classList.add('hidden'), 500);
+              }, 400);
+            }
+            
+            progEl.style.width = pct + '%';
+            pctEl.innerText = pct + '%';
+            
+            if (msgIdx < messages.length && pct > (msgIdx * 20)) {
+               linesEl.innerHTML += `<div class="animate-pulse"><span class="text-cyan-800">[KS.SYS]</span> ${messages[msgIdx]}</div>`;
+               msgIdx++;
+            }
+          }, 150);
+          
+       }, 200);
+    }
+
+    const projectData = {
+      'aetherq': {
+        title: 'AetherQ', sub: 'AI Document Intelligence',
+        prob: `<p class="mb-2">Enterprise documentation is siloed. Keyword search fails when users ask natural language questions requiring context across hundreds of PDF pages.</p>`,
+        arch: `<p class="mb-2">Built a semantic vector search pipeline using <strong>Next.js, Node.js, and pgvector</strong>. Documents are chunked and embedded into 384-dimensional space, allowing RAG-based context retrieval with high precision.</p>`,
+        buttons: `<a href="https://aether-q-rag-based-document-t-git-080441-kartikay-sr-s-projects.vercel.app/" target="_blank" class="px-5 py-2 bg-green-500/20 text-green-400 border border-green-500/50 hover:bg-green-500 hover:text-black font-mono text-xs uppercase tracking-widest rounded transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP</a>
+                  <a href="https://github.com/KartikaySr/AetherQ--RAG-based-Document-Text---to---SQL-analyzer" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> Repo</a>`
+      },
+      'fraud': {
+        title: 'Fraud Detection Core', sub: 'Applied ML',
+        prob: `<p class="mb-2">Credit card fraud patterns evolve rapidly. Rule-based systems generate high false positives, leading to blocked legitimate transactions and frustrated users.</p>`,
+        arch: `<p class="mb-2">Engineered an ensemble ML pipeline combining <strong>XGBoost, LightGBM, and CatBoost</strong>. Achieved 95.16% ROC-AUC. Wrapped the models in high-performance <strong>FastAPI</strong> endpoints for real-time inference scoring.</p>`,
+        buttons: `<a href="https://credit-card-fraud-detection-system-6vazsxh5qzydq6tevghvlk.streamlit.app/" target="_blank" class="px-5 py-2 bg-green-500/20 text-green-400 border border-green-500/50 hover:bg-green-500 hover:text-black font-mono text-xs uppercase tracking-widest rounded transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP</a>
+                  <a href="https://github.com/KartikaySr/Credit-Card-Fraud-Detection-System" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> Repo</a>`
+      },
+      'mindineers': {
+        title: 'MindineersOS', sub: 'Full-Stack Platform',
+        prob: `<p class="mb-2">Developing extensible software platforms often requires complex monolithic architectures. MindineersOS sought to solve this by creating a modular ecosystem where plugins can be hot-swapped dynamically.</p>`,
+        arch: `<p class="mb-2">Engineered using <strong>Bun, React 19, and Drizzle ORM</strong>. The architecture supports real-time WebSocket updates and currently handles 150+ ecosystem plugins with high-performance Postgres integration.</p>`,
+        buttons: `<a href="https://github.com/KartikaySr/MindineersOS" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white flex items-center gap-2"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
+      },
+      'riderouting': {
+        title: 'Ride Routing Platform', sub: 'Real-Time Routing API',
+        prob: `<p class="mb-2">Ride-sharing platforms suffer from high latency during state-syncs between drivers and riders, leading to poor user experience and phantom driver locations.</p>`,
+        arch: `<p class="mb-2">Built a <strong>Node.js & React</strong> backend using pure <strong>WebSockets</strong> for real-time location synchronization. Optimized the <strong>MongoDB</strong> schema for geospatial queries, reducing state-sync latency by 40%.</p>`,
+        buttons: `<a href="https://github.com/KartikaySr/Full-Stack-Ride-Booking-Application" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white flex items-center gap-2"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
+      },
+      'codeambers': {
+        title: 'CodeAmbers', sub: 'AI-Native Engineering Workspace',
+        prob: `<p class="mb-2">Traditional IDEs require heavy context switching when collaborating with AI tools. Developers need a unified environment where autonomous agents can natively read, write, and execute code within the browser.</p>`,
+        arch: `<p class="mb-1 font-bold omni-text">Currently live:</p>
+               <ul class="list-disc list-inside mb-3 space-y-1 text-xs">
+                 <li>In-browser Monaco code editor with Sandpack for real-time code execution and preview</li>
+                 <li>User authentication and session management via Supabase</li>
+                 <li>Next.js/TypeScript frontend architecture, built for extensibility as agent capabilities are added</li>
+               </ul>
+               <p class="mb-1 font-bold omni-text">In active development:</p>
+               <ul class="list-disc list-inside space-y-1 text-xs">
+                 <li>Multi-agent orchestration layer (backend scaffolded with Groq LLM integration and WebSocket support for real-time agent communication)</li>
+                 <li>Autonomous agents for code generation, review, and deployment workflows</li>
+               </ul>
+               <p class="mt-4 text-[10px] text-neutral-500 uppercase tracking-widest">Tech stack: Next.js, React 19, TypeScript, Tailwind CSS, Monaco Editor, Sandpack, Express, Supabase, Groq, WebSocket</p>`,
+        buttons: `<a href="https://github.com/KartikaySr/CodeAmbers" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
+      }
+    };
+
+    const modalBackdrop = document.getElementById('project-modal-backdrop');
+    function openProjectModal(id) {
+      const data = projectData[id];
+      if(!data) return;
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-subtitle').innerText = data.sub;
+      document.getElementById('modal-problem').innerHTML = data.prob;
+      document.getElementById('modal-arch').innerHTML = data.arch;
+      document.getElementById('modal-actions').innerHTML = data.buttons;
+      modalBackdrop.classList.add('active');
+    }
+    function closeProjectModal() { modalBackdrop.classList.remove('active'); }
+
+    // Image Modal Logic for Credentials
+    const imageModalBackdrop = document.getElementById('image-modal-backdrop');
+    function openImageModal(src, isPdf = false) {
+      const container = document.getElementById('image-modal-container');
+      if (isPdf) {
+        container.innerHTML = `<iframe src="${src}" class="w-full h-full border-0"></iframe>`;
+      } else {
+        container.innerHTML = `<img src="${src}" class="max-w-full max-h-full object-contain rounded-2xl">`;
+      }
+      imageModalBackdrop.style.opacity = '1';
+      imageModalBackdrop.style.pointerEvents = 'auto';
+      imageModalBackdrop.querySelector('.modal-content').style.transform = 'scale(1)';
+    }
+
+    function closeImageModal() {
+      imageModalBackdrop.style.opacity = '0';
+      imageModalBackdrop.style.pointerEvents = 'none';
+      imageModalBackdrop.querySelector('.modal-content').style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        document.getElementById('image-modal-container').innerHTML = '';
+      }, 300);
+    }
+
+    const SNAKE_GRID_SIZE = 20;
+    let snake = [{ x: 10, y: 10 }];
+    let snakeDir = { x: 0, y: -1 };
+    let food = { x: 15, y: 5 };
+    let score = 0, snakeLevel = 1, snakeObstacles = [];
+    let snakeHiScore = localStorage.getItem('ks_snake_hi') || 0;
+    let snakeInterval, isSnakePlaying = false;
+    
+    document.getElementById('snake-hi-score').innerText = `HI:${snakeHiScore}`;
+    const snakeGridEl = document.getElementById('snake-grid');
+
+    function generateSnakeObstacles(level) {
+      snakeObstacles = [];
+      const numObstacles = (level - 1) * 4; 
+      while(snakeObstacles.length < numObstacles) {
+        let obs = { x: Math.floor(Math.random() * SNAKE_GRID_SIZE), y: Math.floor(Math.random() * SNAKE_GRID_SIZE) };
+        if(!snake.some(s => s.x === obs.x && s.y === obs.y) && !(food.x === obs.x && food.y === obs.y) && !snakeObstacles.some(o => o.x === obs.x && o.y === obs.y) && !(obs.x === snake[0].x + snakeDir.x && obs.y === snake[0].y + snakeDir.y)) {
+          snakeObstacles.push(obs);
+        }
+      }
+    }
+    function spawnSnakeFood() {
+      let newFood;
+      do { newFood = { x: Math.floor(Math.random() * SNAKE_GRID_SIZE), y: Math.floor(Math.random() * SNAKE_GRID_SIZE) };
+      } while (snake.some(s => s.x === newFood.x && s.y === newFood.y) || snakeObstacles.some(o => o.x === newFood.x && o.y === newFood.y));
+      food = newFood;
+    }
+    function drawSnakeGame() {
+      snakeGridEl.innerHTML = '';
+      const f = document.createElement('div'); f.style.cssText = `position:absolute; width:${100/SNAKE_GRID_SIZE}%; height:${100/SNAKE_GRID_SIZE}%; left:${food.x*100/SNAKE_GRID_SIZE}%; top:${food.y*100/SNAKE_GRID_SIZE}%; background:#43523d; border-radius:2px;`; snakeGridEl.appendChild(f);
+      snakeObstacles.forEach(obs => { const o = document.createElement('div'); o.style.cssText = `position:absolute; width:${100/SNAKE_GRID_SIZE}%; height:${100/SNAKE_GRID_SIZE}%; left:${obs.x*100/SNAKE_GRID_SIZE}%; top:${obs.y*100/SNAKE_GRID_SIZE}%; background:#2e3a2a; border-radius:1px; border: 1px dashed #879E66;`; snakeGridEl.appendChild(o); });
+      snake.forEach(seg => { const s = document.createElement('div'); s.style.cssText = `position:absolute; width:${100/SNAKE_GRID_SIZE}%; height:${100/SNAKE_GRID_SIZE}%; left:${seg.x*100/SNAKE_GRID_SIZE}%; top:${seg.y*100/SNAKE_GRID_SIZE}%; background:#43523d; border:1px solid #879E66;`; snakeGridEl.appendChild(s); });
+      document.getElementById('snake-score-display').innerText = `SCR:${score}`; document.getElementById('snake-level-badge').innerText = snakeLevel;
+    }
+    function updateSnakeGame() {
+      const head = { x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y };
+      if (head.x < 0 || head.x >= SNAKE_GRID_SIZE || head.y < 0 || head.y >= SNAKE_GRID_SIZE || snake.some(s => s.x === head.x && s.y === head.y) || snakeObstacles.some(o => o.x === head.x && o.y === head.y)) {
+        isSnakePlaying = false; clearInterval(snakeInterval); document.getElementById('snake-game-over').classList.remove('hidden'); document.getElementById('snake-game-over').classList.add('flex'); document.getElementById('snake-final-score').innerText = `SCORE: ${score}`;
+        if(score > snakeHiScore) { snakeHiScore = score; localStorage.setItem('ks_snake_hi', snakeHiScore); document.getElementById('snake-hi-score').innerText = `HI:${snakeHiScore}`; }
+        snakeGridEl.style.opacity = '0.4'; return;
+      }
+      snake.unshift(head);
+      if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        if(score >= snakeLevel * 50) {
+          if(snakeLevel === 5) {
+            isSnakePlaying = false; clearInterval(snakeInterval);
+            if(score > snakeHiScore) { snakeHiScore = score; localStorage.setItem('ks_snake_hi', snakeHiScore); document.getElementById('snake-hi-score').innerText = `HI:${snakeHiScore}`; }
+            document.getElementById('snake-win-screen').classList.remove('hidden'); document.getElementById('snake-win-screen').classList.add('flex'); snakeGridEl.style.opacity = '0.4';
+            setTimeout(() => { window.location.href = 'https://www.linkedin.com/in/kartikaysr/'; }, 3000); return;
+          } else {
+            snakeLevel++; generateSnakeObstacles(snakeLevel); clearInterval(snakeInterval);
+            snakeInterval = setInterval(updateSnakeGame, Math.max(50, 120 - ((snakeLevel - 1) * 15)));
+          }
+        }
+        spawnSnakeFood();
+      } else { snake.pop(); }
+      drawSnakeGame();
+    }
+    document.getElementById('snake-start-btn').addEventListener('click', () => {
+      snake = [{ x: 10, y: 10 }]; snakeDir = { x: 0, y: -1 }; score = 0; snakeLevel = 1; isSnakePlaying = true; generateSnakeObstacles(snakeLevel); spawnSnakeFood();
+      ['snake-start-screen', 'snake-game-over', 'snake-win-screen'].forEach(id => { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); });
+      snakeGridEl.style.opacity = '1'; clearInterval(snakeInterval); snakeInterval = setInterval(updateSnakeGame, 120);
+    });
+    window.addEventListener('keydown', (e) => {
+      if(!isSnakePlaying) return;
+      if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) e.preventDefault();
+      if(e.key === 'ArrowUp' && snakeDir.y !== 1) snakeDir = {x: 0, y: -1};
+      if(e.key === 'ArrowDown' && snakeDir.y !== -1) snakeDir = {x: 0, y: 1};
+      if(e.key === 'ArrowLeft' && snakeDir.x !== 1) snakeDir = {x: -1, y: 0};
+      if(e.key === 'ArrowRight' && snakeDir.x !== -1) snakeDir = {x: 1, y: 0};
+    });
+
+    // Mobile/Web On-Screen Controls
+    const handleDirBtn = (id, newDir, oppAxis) => {
+      const btn = document.getElementById(id);
+      ['mousedown', 'touchstart'].forEach(evt => {
+        btn.addEventListener(evt, (e) => {
+          e.preventDefault(); // prevent double tap zoom or scroll
+          if(isSnakePlaying && snakeDir[oppAxis] !== -newDir[oppAxis] && snakeDir[oppAxis === 'x' ? 'y' : 'x'] !== -newDir[oppAxis === 'x' ? 'y' : 'x']) {
+            if(oppAxis === 'y') { if(snakeDir.y !== -newDir.y) snakeDir = newDir; }
+            else { if(snakeDir.x !== -newDir.x) snakeDir = newDir; }
+          }
+        });
+      });
+    };
+    handleDirBtn('btn-up', {x: 0, y: -1}, 'y');
+    handleDirBtn('btn-down', {x: 0, y: 1}, 'y');
+    handleDirBtn('btn-left', {x: -1, y: 0}, 'x');
+    handleDirBtn('btn-right', {x: 1, y: 0}, 'x');
+
+    
+    // --- EXTREME 3D PHYSICS ENGINE (LERP) ---
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+      let bounds;
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+      let isHovered = false;
+      let rafId = null;
+      
+      function updateCard() {
+        if (isHovered) {
+          // Lerp towards target
+          currentX += (targetX - currentX) * 0.1;
+          currentY += (targetY - currentY) * 0.1;
+          
+          let rotateX = ((currentY - bounds.height / 2) / (bounds.height / 2)) * -12; // Reduced to 12 max
+          let rotateY = ((currentX - bounds.width / 2) / (bounds.width / 2)) * 12;
+          
+          // Stabilize to 4 directions (Cross-axis lock)
+          if (Math.abs(rotateX) > Math.abs(rotateY)) {
+             rotateY = 0;
+          } else {
+             rotateX = 0;
+          }
+          
+          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          
+          Array.from(card.children).forEach(child => {
+            if (!child.classList.contains('snake-trace') && !child.classList.contains('absolute') && !child.tagName.toLowerCase().includes('canvas')) {
+              child.style.transform = 'translateZ(80px)'; // Deep Float
+              child.style.transition = 'transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+          });
+          rafId = requestAnimationFrame(updateCard);
+        } else {
+          // Lerp back to 0
+          currentX += (0 - currentX) * 0.1;
+          currentY += (0 - currentY) * 0.1;
+          
+          if(Math.abs(currentX) > 0.5 || Math.abs(currentY) > 0.5) {
+            let rotateX = ((currentY - bounds.height / 2) / (bounds.height / 2)) * -12;
+            let rotateY = ((currentX - bounds.width / 2) / (bounds.width / 2)) * 12;
+            
+            if (Math.abs(rotateX) > Math.abs(rotateY)) {
+               rotateY = 0;
+            } else {
+               rotateX = 0;
+            }
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`;
+            rafId = requestAnimationFrame(updateCard);
+          } else {
+            card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            cancelAnimationFrame(rafId);
+          }
+        }
+      }
+
+      card.addEventListener('mouseenter', () => {
+        bounds = card.getBoundingClientRect();
+        isHovered = true;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(updateCard);
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        targetX = e.clientX - bounds.left;
+        targetY = e.clientY - bounds.top;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetX = bounds.width / 2;
+        targetY = bounds.height / 2;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(updateCard);
+        
+        Array.from(card.children).forEach(child => {
+          if (!child.classList.contains('snake-trace') && !child.classList.contains('absolute') && !child.tagName.toLowerCase().includes('canvas')) {
+            child.style.transform = 'translateZ(0px)';
+            child.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          }
+        });
+      });
+    });
+
+    // --- WARP SPEED CANVAS ENGINE ---
+    const warpCanvas = document.getElementById('warp-canvas');
+    let warpCtx = null;
+    let stars = [];
+    let warpSpeed = 0;
+    let warpActive = false;
+
+    if (warpCanvas) {
+      warpCtx = warpCanvas.getContext('2d');
+    }
+
+    function initWarp() {
+      if(!warpCanvas) return;
+      warpCanvas.width = window.innerWidth;
+      warpCanvas.height = window.innerHeight;
+      stars = [];
+      for(let i=0; i<600; i++) {
+        stars.push({
+          x: Math.random() * warpCanvas.width - warpCanvas.width/2,
+          y: Math.random() * warpCanvas.height - warpCanvas.height/2,
+          z: Math.random() * 2000
+        });
+      }
+    }
+    
+    function animateWarp() {
+      if(!warpActive || !warpCtx) return;
+      warpCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      warpCtx.fillRect(0, 0, warpCanvas.width, warpCanvas.height);
+      
+      const centerX = warpCanvas.width / 2;
+      const centerY = warpCanvas.height / 2;
+      
+      stars.forEach(star => {
+        star.z -= warpSpeed;
+        if(star.z <= 0) {
+          star.x = Math.random() * warpCanvas.width - centerX;
+          star.y = Math.random() * warpCanvas.height - centerY;
+          star.z = 2000;
+        }
+        
+        const sx = (star.x / star.z) * 1000 + centerX;
+        const sy = (star.y / star.z) * 1000 + centerY;
+        const size = Math.max(0.1, (1 - star.z / 2000) * 4);
+        
+        warpCtx.fillStyle = '#06b6d4';
+        warpCtx.fillRect(sx, sy, size, size);
+      });
+      requestAnimationFrame(animateWarp);
+    }
+    
+    window.addEventListener('resize', () => { if(warpActive) initWarp(); });
+
+    // Contact Form Submission
+    async function submitContactForm() {
+      const nameInput = document.getElementById('sender-id-input');
+      const emailInput = document.getElementById('return-node-input');
+      const msgInput = document.getElementById('payload-data-input');
+      const btn = document.getElementById('transmit-btn');
+      const status = document.getElementById('transmit-status');
+
+      if(!nameInput.value || !emailInput.value || !msgInput.value) {
+          status.textContent = "[ERROR] All fields are required.";
+          status.className = "text-xs text-center mt-2 text-red-500";
+          status.classList.remove('hidden');
+          return;
+      }
+
+      btn.innerHTML = 'Transmitting... <i class="ph ph-spinner animate-spin"></i>';
+      status.classList.add('hidden');
+
+      // Mailto frontend client approach
+      const subject = encodeURIComponent(`Contact from ${nameInput.value}`);
+      const body = encodeURIComponent(`Return Node (Email): ${emailInput.value}\n\nPayload:\n${msgInput.value}`);
+      const mailtoLink = `mailto:kartikaysr@gmail.com?subject=${subject}&body=${body}`;
+      
+      window.location.href = mailtoLink;
+      
+      btn.innerHTML = 'Transmitted <i class="ph ph-check"></i>';
+      btn.classList.add('bg-green-500', 'text-white');
+      status.textContent = "[SUCCESS] Opened default mail client to transmit payload.";
+      status.className = "text-xs text-center mt-2 text-[#38e26a]";
+      status.classList.remove('hidden');
+      
+      nameInput.value = '';
+      emailInput.value = '';
+      msgInput.value = '';
+      
+      setTimeout(() => {
+          btn.innerHTML = 'Transmit <i class="ph ph-paper-plane-tilt"></i>';
+          btn.classList.remove('bg-green-500', 'text-white');
+      }, 5000);
+    }
+    // --- 1. MICRO-SOUND DESIGN (Web Audio API) ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playHoverSound() {
+      // Removed high-pitched tick for a more luxurious feel
+      return;
+    }
+
+    function playClickSound() {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      // Luxurious soft chime
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.3);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    function playTransitionSound() {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.8);
+      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.8);
+    }
+
+    document.addEventListener('click', initAudio, { once: true });
+    document.addEventListener('touchstart', initAudio, { once: true });
+    document.addEventListener('keydown', initAudio, { once: true });
+    
+    document.querySelectorAll('.interactive, a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { initAudio(); playHoverSound(); });
+      el.addEventListener('mousedown', () => { initAudio(); playClickSound(); });
+    });
+
+    // --- 2. INTERACTIVE DATA-STREAM CANVAS ---
+    const streamCanvas = document.getElementById('data-stream-canvas');
+    if (streamCanvas) {
+      const streamCtx = streamCanvas.getContext('2d');
+      let particles = [];
+      
+      function resizeStream() {
+        streamCanvas.width = window.innerWidth;
+        streamCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeStream);
+      resizeStream();
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * streamCanvas.width;
+          this.y = Math.random() * streamCanvas.height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.size = Math.random() * 2 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > streamCanvas.width) this.vx *= -1;
+          if (this.y < 0 || this.y > streamCanvas.height) this.vy *= -1;
+          
+          // Repel from cursor
+          const dx = this.x - cursorX;
+          const dy = this.y - cursorY;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 150) {
+            this.x += (dx / dist) * 1;
+            this.y += (dy / dist) * 1;
+          }
+        }
+        draw() {
+          streamCtx.beginPath();
+          streamCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          streamCtx.fillStyle = htmlEl.classList.contains('dark') ? 'rgba(56, 226, 106, 0.4)' : 'rgba(0, 0, 0, 0.2)';
+          streamCtx.fill();
+        }
+      }
+
+      // Less particles for better mobile performance
+      for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+      function animateStream() {
+        streamCtx.clearRect(0, 0, streamCanvas.width, streamCanvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 120) {
+              streamCtx.beginPath();
+              streamCtx.moveTo(particles[i].x, particles[i].y);
+              streamCtx.lineTo(particles[j].x, particles[j].y);
+              streamCtx.strokeStyle = htmlEl.classList.contains('dark') ? `rgba(56, 226, 106, ${0.2 - dist/600})` : `rgba(0, 0, 0, ${0.1 - dist/1200})`;
+              streamCtx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animateStream);
+      }
+      animateStream();
+    }
+
+    // --- 4. GAMIFIED EASTER EGGS (Konami Code) ---
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    
+    window.addEventListener('keydown', (e) => {
+      if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          triggerGlitch();
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    function triggerGlitch() {
+      initAudio();
+      playTransitionSound(); // Play intense sound
+      
+      const glitchOverlay = document.createElement('div');
+      glitchOverlay.className = "fixed inset-0 z-[9999] bg-black text-[#38e26a] font-mono flex flex-col items-center justify-center";
+      glitchOverlay.innerHTML = `
+        <h1 class="text-6xl font-bold mb-4 animate-pulse uppercase tracking-widest text-center" style="text-shadow: 0 0 20px #38e26a;">SYSTEM OVERRIDE</h1>
+        <p class="text-2xl mb-8 opacity-80 uppercase text-center">Secret Vault Unlocked</p>
+        <a href="#" class="px-8 py-4 border border-[#38e26a] hover:bg-[#38e26a] hover:text-black transition-colors" onclick="this.innerHTML='DOWNLOADING...'; setTimeout(() => document.body.removeChild(glitchOverlay), 2000)">ACCESS CLASSIFIED FILES</a>
+      `;
+      document.body.appendChild(glitchOverlay);
+      
+      // Glitch visual effect
+      document.body.style.filter = "invert(1) hue-rotate(180deg) saturate(200%)";
+      setTimeout(() => { document.body.style.filter = "none"; }, 150);
+      setTimeout(() => { document.body.style.filter = "invert(1) hue-rotate(180deg) saturate(200%)"; }, 300);
+      setTimeout(() => { document.body.style.filter = "none"; }, 450);
+    }
+
+    // --- 5. MAGNETIC BUTTONS ---
+    document.querySelectorAll('.interactive, button, a').forEach(btn => {
+      // Ignore terminal inputs and snake controls to avoid annoying ux
+      if(btn.id === 'terminal-input' || btn.id.startsWith('btn-') || btn.closest('#snake-controls')) return;
+      
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0px, 0px)';
+        btn.style.transition = 'transform 0.3s ease-out';
+      });
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transition = 'none';
+      });
+    });
+
+  </script>
+</body>
+</html>
