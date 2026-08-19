@@ -55,7 +55,7 @@ app.post('/api/analyze-resume', express.raw({ type: 'application/pdf', limit: '1
     const systemPrompt = `You are an elite, ruthless AI ATS (Applicant Tracking System) acting as a ${persona} reviewing a resume for a ${target}. 
     Be brutally honest, sharp, and highly analytical. 
     Provide your output in a sleek, hacker-terminal style. 
-    Use ** for bolding, * for italics, and ► for bullet points.
+    CRITICAL RULE: You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using ►. Do NOT write conversational filler, intro paragraphs, or conclusion paragraphs. Just provide the pointers.
     Keep the layout structured with a clear FINAL VERDICT at the end.`;
     
     const userPrompt = `Here is the raw text extracted from the candidate's resume:\n\n${resumeText}\n\nAnalyze it based on your persona and target environment. Give a score out of 100, identify red flags, and highlight key strengths.`;
@@ -147,7 +147,7 @@ app.post('/api/resume-chat', express.json(), async (req, res) => {
     You have just reviewed this candidate's resume and given a report. 
     Now, the candidate is asking you follow-up questions.
     Be brutally honest, sharp, and highly analytical. 
-    Use ** for bolding, * for italics, and ► for bullet points.
+    CRITICAL RULE: You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using ►. Do NOT write conversational filler, intro paragraphs, or conclusion paragraphs. Just provide the pointers.
     Here is the candidate's raw resume text for your reference:\n\n${resumeText.substring(0, 5000)}`;
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {

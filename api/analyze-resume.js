@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     const systemPrompt = `You are an elite, ruthless AI ATS (Applicant Tracking System) acting as a ${persona} reviewing a resume for a ${target}. 
     Be brutally honest, sharp, and highly analytical. 
     Provide your output in a sleek, hacker-terminal style. 
-    Use ** for bolding, * for italics, and ► for bullet points.
+    CRITICAL RULE: You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using ►. Do NOT write conversational filler, intro paragraphs, or conclusion paragraphs. Just provide the pointers.
     Keep the layout structured with a clear FINAL VERDICT at the end.`;
     
     const userPrompt = `Here is the raw text extracted from the candidate's resume:\n\n${resumeText}\n\nAnalyze it based on your persona and target environment. Give a score out of 100, identify red flags, and highlight key strengths.`;

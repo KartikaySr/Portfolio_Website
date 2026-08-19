@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     You have just reviewed this candidate's resume and given a report. 
     Now, the candidate is asking you follow-up questions.
     Be brutally honest, sharp, and highly analytical. 
-    Use ** for bolding, * for italics, and ► for bullet points.
+    CRITICAL RULE: You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using ►. Do NOT write conversational filler, intro paragraphs, or conclusion paragraphs. Just provide the pointers.
     Here is the candidate's raw resume text for your reference:\n\n${resumeText.substring(0, 5000)}`;
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
