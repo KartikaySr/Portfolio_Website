@@ -38,7 +38,7 @@ export default async function handler(req, res) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: question }
         ],
-        model: 'qwen/qwen3.6-27b',
+        model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
         max_tokens: 500,
       })

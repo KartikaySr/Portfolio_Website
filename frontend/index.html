@@ -242,7 +242,21 @@
       border-color: var(--omni-main) !important; 
       background-color: var(--omni-dim) !important; 
       color: var(--omni-main) !important; 
-      box-shadow: 0 0 12px var(--omni-glow) !important; 
+      box-shadow: 0 0 20px var(--omni-glow), inset 0 0 10px var(--omni-glow) !important; 
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    
+    /* Ensure Pikachu mode explicitly styles selected buttons so they stand out and aren't swallowed by the wildcard */
+    .theme-pikachu .mode-btn[data-selected="true"] {
+      background-color: #ffd700 !important;
+      color: #000 !important;
+      text-shadow: none !important;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(255, 215, 0, 0.5) !important;
+    }
+    .theme-pikachu .mode-btn[data-selected="true"] * {
+      color: #000 !important;
+      text-shadow: none !important;
     }
     @keyframes scan {
       0% { top: 0; opacity: 0; }

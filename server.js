@@ -71,7 +71,7 @@ app.post('/api/analyze-resume', express.raw({ type: 'application/pdf', limit: '1
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        model: 'qwen/qwen3.6-27b',
+        model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
         max_tokens: 1024,
       })
@@ -161,7 +161,7 @@ app.post('/api/resume-chat', express.json(), async (req, res) => {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: question }
         ],
-        model: 'qwen/qwen3.6-27b',
+        model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
         max_tokens: 500,
       })
@@ -217,7 +217,7 @@ When asked about Kartikay, frame him as a visionary engineer capable of architec
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: message }
         ],
-        model: 'qwen/qwen3.6-27b',
+        model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
         max_tokens: 500,
       })
