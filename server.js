@@ -98,16 +98,29 @@ app.post('/api/analyze-resume', express.raw({ type: 'application/pdf', limit: '1
       const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmbm91c3Z1YW1zZmdmYW5wdnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NTk0MTgsImV4cCI6MjEwMjUzNTQxOH0.6lruXTTQR81nhhZgkpZSIdZwq9N1FxiC5xmV8l57Cls';
       
       const supabase = createClient(supabaseUrl, supabaseKey);
+      
+      const fileName = `resume_${Date.now()}.pdf`;
+      const { data: storageData, error: storageError } = await supabase.storage
+        .from('resumes')
+        .upload(fileName, pdfBuffer, { contentType: 'application/pdf' });
+
+      if (storageError) {
+        console.error('[API Warning] Could not upload PDF to Supabase Storage:', storageError.message);
+      }
+      
+      const filePath = storageData ? storageData.path : null;
+
       await supabase.from('analysis_reports').insert([
         {
-          file_name: 'direct_upload.pdf',
+          file_name: fileName,
+          file_path: filePath,
           persona: persona,
           target_environment: target,
           ai_score: parseInt(aiReply.match(/(\d+)\/100/)?.[1] || 0),
           full_report: aiReply
         }
       ]);
-      console.log('[API Process] Saved report to Supabase.');
+      console.log('[API Process] Saved report and PDF to Supabase.');
     } catch (dbErr) {
       console.error('[API Warning] Could not save to Supabase database (ignoring):', dbErr.message);
     }
