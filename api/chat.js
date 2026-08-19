@@ -8,7 +8,12 @@ Kartikay is a high-end Software Engineer specializing in backend systems, real-t
 Your articulation is impeccable, sophisticated, and highly authoritative. You speak with the precision of an advanced quantum computer.
 You MUST format your responses primarily as Markdown bullet points. 
 Use bold text (**like this**) to highlight key technologies, features, and concepts.
-Tone guidelines: Confident, cutting-edge, slightly sci-fi, but entirely professional. Never use emojis. 
+
+CRITICAL RULE: DO NOT output any "thinking process", "Here is my thinking", or internal reasoning. DO NOT output conversational filler, intros, or outros.
+You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using the ► symbol. Example:
+► **Point 1:** Detail
+► **Point 2:** Detail
+\nTone guidelines: Confident, cutting-edge, slightly sci-fi, but entirely professional. Never use emojis. 
 Limit responses to 3-4 concise, impactful bullet points unless specifically asked for deep detail.
 Key data: 
 - Skills: Java, Python, Node.js, Next.js, WebSockets, GCP, AWS, Docker, Machine Learning.
@@ -50,11 +55,26 @@ export default async function handler(req) {
     }
 
     const data = await response.json();
+    
     let reply = data.choices[0].message.content;
     
-    // Strip <think> tags from reasoning models
+    // STRIP REASONING LOGIC
     reply = reply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
-
+    if (reply.includes('►')) {
+      reply = reply.substring(reply.indexOf('►')).trim();
+    } else {
+      // If it has 'thinking process' without bullet points
+      const thinkMatch = reply.match(/thinking process[\s\S]*?:\n\s*\n([\s\S]*)/i);
+      if (thinkMatch) {
+        reply = thinkMatch[1].trim();
+      } else {
+        const parts = reply.split(/\n\s*\n/);
+        if (reply.toLowerCase().includes('thinking process') && parts.length > 1) {
+          reply = parts.slice(1).join('\n').trim();
+        }
+      }
+    }
+    
     return new Response(JSON.stringify({ reply }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }

@@ -1562,7 +1562,24 @@
         aiEyePupil.classList.replace("bg-yellow-400", "bg-cyan-400");
         aiEyePupil.style.boxShadow = "0 0 30px #22d3ee";
 
-        await typeText(responseDiv, `> [KS.SYS]: ${data.reply || data.error}`, 15);
+        
+        let finalReply = data.reply || data.error || "";
+        
+        // Strip <think> tags completely
+        finalReply = finalReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
+        
+        // If it still contains "Here's a thinking process" because there were no tags, slice to the first bullet point
+        if (finalReply.includes('►')) {
+            finalReply = finalReply.substring(finalReply.indexOf('►')).trim();
+        } else if (finalReply.toLowerCase().includes('thinking process:')) {
+            const parts = finalReply.split(/\n\s*\n/);
+            if (parts.length > 1) {
+                finalReply = parts.slice(1).join('\n').trim();
+            }
+        }
+
+        await typeText(responseDiv, `> [KS.SYS]: \n${finalReply}`, 15);
+
       } catch (err) {
         responseDiv.innerHTML = `> [KS.SYS]: Connection to central core failed.`;
         responseDiv.className = "text-red-500 mb-1";
