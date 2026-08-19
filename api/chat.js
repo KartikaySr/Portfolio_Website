@@ -53,7 +53,7 @@ export default async function handler(req) {
     let reply = data.choices[0].message.content;
     
     // Strip <think> tags from reasoning models
-    reply = reply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    reply = reply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
 
     return new Response(JSON.stringify({ reply }), {
       status: 200,

@@ -87,7 +87,7 @@ app.post('/api/analyze-resume', express.raw({ type: 'application/pdf', limit: '1
     let aiReply = groqData.choices[0]?.message?.content || 'Error generating AI response.';
     
     // Strip <think> tags from reasoning models
-    aiReply = aiReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    aiReply = aiReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
 
     // Try to save to Supabase (Non-blocking)
     try {
@@ -175,7 +175,7 @@ app.post('/api/resume-chat', express.json(), async (req, res) => {
     let aiReply = groqData.choices[0]?.message?.content || 'Error generating response.';
     
     // Strip <think> tags from reasoning models
-    aiReply = aiReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    aiReply = aiReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
     
     return res.status(200).json({ reply: aiReply });
   } catch (error) {
@@ -231,7 +231,7 @@ When asked about Kartikay, frame him as a visionary engineer capable of architec
     let aiReply = groqData.choices[0]?.message?.content || 'Error generating response.';
     
     // Strip <think> tags from reasoning models
-    aiReply = aiReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    aiReply = aiReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
     
     return res.status(200).json({ reply: aiReply });
   } catch (error) {

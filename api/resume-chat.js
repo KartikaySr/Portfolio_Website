@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     let aiReply = groqData.choices[0]?.message?.content || 'Error generating response.';
     
     // Strip <think> tags from reasoning models
-    aiReply = aiReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    aiReply = aiReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
     
     return res.status(200).json({ reply: aiReply });
   } catch (error) {

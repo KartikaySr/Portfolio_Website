@@ -98,7 +98,7 @@ export default async function handler(req, res) {
     let aiReply = groqData.choices[0]?.message?.content || 'Error generating AI response.';
     
     // Strip <think> tags from reasoning models
-    aiReply = aiReply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    aiReply = aiReply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
 
     // Try to save to Supabase (Non-blocking)
     try {
