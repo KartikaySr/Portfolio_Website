@@ -163,7 +163,7 @@ app.post('/api/resume-chat', express.json(), async (req, res) => {
         ],
         model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
-        max_tokens: 500,
+        max_tokens: 2000,
       })
     });
 
@@ -224,7 +224,7 @@ When asked about Kartikay, frame him as a visionary engineer capable of architec
         ],
         model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
-        max_tokens: 500,
+        max_tokens: 2000,
       })
     });
 
