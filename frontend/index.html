@@ -16,6 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/index.min.js"></script>
   
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -216,9 +217,191 @@
     .float-child { transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     
     #warp-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.4; }
+    .mode-btn[data-selected="true"] {
+      border-color: var(--omni-main) !important; 
+      background-color: var(--omni-dim) !important; 
+      color: var(--omni-main) !important; 
+      box-shadow: 0 0 12px var(--omni-glow) !important; 
+    }
+    @keyframes scan {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    .animate-scan {
+      animation: scan 2s linear infinite;
+    }
+  
+        /* --- PIKACHU POLYMORPHIC THEME --- */
+    .cursor-ripple {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,204,0,0.8) 0%, rgba(255,255,255,0) 70%);
+      transform: translate(-50%, -50%) scale(0);
+      animation: rippleAnim 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+      z-index: 9999;
+      mix-blend-mode: screen;
+    }
+    @keyframes rippleAnim {
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.8; }
+      100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+    
+    .theme-pikachu {
+      --bg-color: #050505; 
+      --text-main: #ffffff;
+      --omni-main: #ffcc00; 
+      --omni-hover: #ffea00;
+    }
+    
+    .theme-pikachu .omni-text { color: var(--omni-main) !important; font-weight: bold; text-shadow: 0 0 10px rgba(255, 204, 0, 0.4); }
+    .theme-pikachu .omni-bg { background-color: var(--omni-main) !important; box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
+    .theme-pikachu .omni-border { border-color: var(--omni-main) !important; }
+    .theme-pikachu .omni-shadow { box-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
+    
+    /* Framer Motion Style Glassmorphism */
+    .theme-pikachu .glass-panel, .theme-pikachu nav, .theme-pikachu .border-cyan-900 {
+       background: rgba(10, 10, 10, 0.4) !important;
+       backdrop-filter: blur(24px) saturate(150%) !important;
+       -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+       border: 1px solid rgba(255, 204, 0, 0.15) !important;
+       box-shadow: inset 0 0 20px rgba(255, 204, 0, 0.05), 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .theme-pikachu .interactive {
+       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    .theme-pikachu .interactive:hover {
+       transform: translateY(-2px) scale(1.02);
+       box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
+    }
+    
+    /* Polymorphic Orbs */
+    #poly-orbs {
+       position: fixed;
+       top: 0; left: 0; width: 100vw; height: 100vh;
+       overflow: hidden;
+       pointer-events: none;
+       z-index: -2;
+       opacity: 0;
+       transition: opacity 1s ease;
+    }
+    .theme-pikachu #poly-orbs { opacity: 1; }
+    .poly-orb {
+       position: absolute;
+       border-radius: 50%;
+       filter: blur(80px);
+       animation: floatOrb 20s infinite alternate ease-in-out;
+    }
+    .orb-1 { width: 60vw; height: 60vw; background: rgba(255, 204, 0, 0.15); top: -10vw; left: -10vw; }
+    .orb-2 { width: 50vw; height: 50vw; background: rgba(255, 100, 0, 0.1); bottom: -10vw; right: -10vw; animation-delay: -5s; }
+    .orb-3 { width: 40vw; height: 40vw; background: rgba(255, 234, 0, 0.12); top: 30vh; left: 40vw; animation-duration: 25s; }
+    
+    @keyframes floatOrb {
+       0% { transform: translate(0, 0) scale(1); }
+       50% { transform: translate(5vw, 10vh) scale(1.1); }
+       100% { transform: translate(-5vw, -5vh) scale(0.9); }
+    }
+    
+    /* 3D Glass Lightning Bars */
+    #lightning-container {
+       position: fixed;
+       top: 0; left: 0; width: 100vw; height: 100vh;
+       pointer-events: none;
+       z-index: -1;
+       perspective: 1000px;
+       overflow: hidden;
+       opacity: 0;
+       transition: opacity 1s ease;
+    }
+    .theme-pikachu #lightning-container { opacity: 1; }
+    
+    .glass-lightning {
+       position: absolute;
+       width: 200px;
+       height: 10px;
+       background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 10%, rgba(255,204,0,0.9) 50%, rgba(255,255,255,0) 100%);
+       box-shadow: 0 0 20px rgba(255, 204, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.5);
+       backdrop-filter: blur(10px);
+       transform: skewX(-45deg) translateZ(0);
+       border-radius: 5px;
+       animation: shootLightning linear infinite;
+    }
+    
+    @keyframes shootLightning {
+       0% { transform: skewX(-45deg) translate3d(-20vw, 0, -500px); opacity: 0; }
+       10% { opacity: 1; }
+       90% { opacity: 1; }
+       100% { transform: skewX(-45deg) translate3d(120vw, 0, 500px); opacity: 0; }
+    }
+
+    /* Cinematic Pokeball */
+    #pokeball-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.9);
+      z-index: 99999; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    #pokeball-overlay.active { opacity: 1; pointer-events: all; }
+    
+    .cinematic-ball {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 48%, #222 49%, #222 51%, #ffffff 52%, #e0e0e0 100%);
+      border: 6px solid #111;
+      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.8);
+      position: relative;
+      transform: scale(0.5) translateY(-200px);
+      opacity: 0;
+    }
+    #pokeball-overlay.active .cinematic-ball {
+      animation: dropIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    
+    .cinematic-ball::after {
+      content: ''; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 36px; height: 36px; background: #fff;
+      border: 6px solid #111; border-radius: 50%;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+      transition: all 0.2s ease;
+    }
+    #pokeball-overlay.active .cinematic-ball.flash::after {
+      background: #ffcc00;
+      box-shadow: 0 0 50px 20px #ffcc00, 0 0 100px 50px #fff;
+    }
+    #pokeball-overlay.active .cinematic-ball.flash {
+      animation: explode 0.5s ease forwards;
+    }
+    
+    @keyframes dropIn {
+      0% { transform: scale(0.5) translateY(-200px) rotate(-180deg); opacity: 0; }
+      40% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.1) translateY(-20px) rotate(10deg); }
+      60% { transform: scale(1) translateY(0) rotate(0deg); }
+      70% { transform: scale(1.05) translateY(-10px) rotate(-5deg); }
+      80% { transform: scale(1) translateY(0) rotate(0deg); }
+      100% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+    }
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+      100% { transform: scale(50); opacity: 0; filter: brightness(10); }
+    }
+    /* --- END PIKACHU POLYMORPHIC THEME --- */
   </style>
 </head>
 <body>
+  <!-- Polymorphic Background -->
+  <div id="poly-orbs">
+    <div class="poly-orb orb-1"></div>
+    <div class="poly-orb orb-2"></div>
+    <div class="poly-orb orb-3"></div>
+  </div>
+  <!-- 3D Lightning Container -->
+  <div id="lightning-container"></div>
+  
+  <div id="pokeball-overlay"><div class="cinematic-ball" id="cine-ball"></div></div>
 
   <div id="boot-screen">
     <div class="relative w-20 h-20 rounded-full border-[5px] border-omni-main mb-8 shadow-[0_0_30px_var(--omni-glow)] flex items-center justify-center animate-[spin_3s_linear_infinite] overflow-hidden">
@@ -278,6 +461,9 @@
 
       <div class="flex items-center gap-4">
 
+        <button id="pika-toggle" class="p-2 text-yellow-500 hover:text-yellow-400 transition-opacity interactive flex items-center gap-2" title="Pikachu Mode">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </button>
         <button id="color-toggle" class="p-2 omni-text hover:opacity-80 transition-opacity interactive flex items-center gap-2">
           <i class="ph ph-aperture text-xl"></i>
         </button>
@@ -620,6 +806,72 @@
 
     <section class="w-full mb-12 reveal px-6 max-w-5xl mx-auto flex flex-col gap-12">
       
+      <!-- AI ATS RESUME ANALYZER (Supabase Powered) -->
+      <div class="zero-g-1 w-full">
+        <div class="glass-card p-10 md:p-16 rounded-[3.5rem] relative spatial-float w-full flex flex-col items-center interactive group shadow-[0_0_50px_rgba(56,226,106,0.15)] dark:shadow-[0_0_50px_rgba(56,226,106,0.3)] border-green-500/30 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-green-900/10 to-emerald-900/10 blur-3xl -z-10"></div>
+          
+          <div class="font-mono text-sm text-neutral-500 tracking-widest flex items-center gap-2 mb-8 self-start">
+            <i class="ph ph-robot text-sm omni-text"></i> AI_ATS_ANALYZER.EXE 
+            <span class="text-[10px] bg-neutral-200 dark:bg-neutral-800 text-black dark:text-white px-3 py-1 rounded-full ml-2">v2.0_SUPABASE</span>
+          </div>
+
+          <h3 class="text-3xl font-bold mb-4 font-mono uppercase tracking-widest text-center" id="resume-title">Test Your Resume</h3>
+          <p class="text-neutral-500 font-mono text-sm mb-10 text-center max-w-lg" id="resume-subtitle">Upload your PDF. Choose your target. Let the AI ruthlessly evaluate your chances.</p>
+
+          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <!-- Persona Selection -->
+            <div class="flex flex-col gap-4">
+              <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest"><i class="ph ph-user"></i> Select Reviewer Persona</span>
+              <div class="grid grid-cols-2 gap-3">
+                <button data-value="HR" data-selected="true" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">👔 HR Director</button>
+                <button data-value="Engineer" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">💻 Tech Lead</button>
+                <button data-value="Recruiter" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🔍 Headhunter</button>
+                <button data-value="CEO" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 CEO / Founder</button>
+              </div>
+            </div>
+
+            <!-- Target Selection -->
+            <div class="flex flex-col gap-4">
+              <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest"><i class="ph ph-target"></i> Select Target Environment</span>
+              <div class="grid grid-cols-2 gap-3">
+                <button data-value="Startup" data-selected="true" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 Seed Startup</button>
+                <button data-value="MNC" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🏢 Fortune 500</button>
+                <button data-value="Agency" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🎨 Creative Agency</button>
+                <button data-value="FAANG" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🌐 FAANG / Big Tech</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="resume-drop-zone" class="w-full relative rounded-2xl border-2 border-dashed border-neutral-300 dark:border-neutral-700 p-12 flex flex-col items-center justify-center bg-neutral-50/50 dark:bg-black/50 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors group cursor-pointer overflow-hidden">
+            <div id="resume-laser" class="absolute left-0 right-0 h-1 bg-[#38e26a] shadow-[0_0_15px_#38e26a] opacity-0 transition-opacity z-10 pointer-events-none"></div>
+            <i class="ph ph-file-pdf text-4xl mb-4 text-neutral-400 group-hover:omni-text transition-colors"></i>
+            <p class="font-mono text-sm text-neutral-500 mb-6 text-center">Drag & Drop your resume (PDF) here<br><span class="text-xs opacity-70">Max 3MB. Data is sent directly to Supabase Vault.</span></p>
+            <input type="file" id="resume-file-input" accept=".pdf" class="hidden" />
+            <button onclick="document.getElementById('resume-file-input').click()" id="resume-upload-btn" class="px-8 py-3 bg-neutral-900 dark:bg-[#0a0a0a] border border-neutral-700 text-white dark:text-white font-mono text-xs tracking-widest uppercase hover:omni-border hover:omni-text transition-all interactive shadow-lg hover:shadow-[0_0_20px_var(--omni-glow)] rounded-full">
+              Select PDF
+            </button>
+          </div>
+
+          <!-- TERMINAL OUTPUT -->
+          <div id="resume-output-container" class="w-full mt-10 hidden flex-col">
+            <div class="w-full bg-[#0a0a0a] rounded-t-xl border border-neutral-800 p-3 flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-4 font-mono text-[10px] text-neutral-500 tracking-widest">/sys/logs/analysis_report.md</span>
+            </div>
+            <div class="w-full bg-[#111] rounded-b-xl border border-t-0 border-neutral-800 p-6 md:p-8 relative">
+              <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+              <div id="resume-terminal-body" class="font-mono text-sm md:text-base leading-relaxed text-neutral-300 relative z-10 whitespace-pre-wrap">
+                <!-- output injected here -->
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
       <div class="zero-g-1 w-full">
         <div class="glass-card p-10 md:p-16 rounded-[3.5rem] relative spatial-float w-full flex flex-col items-center interactive group shadow-[0_0_50px_rgba(6,182,212,0.15)] dark:shadow-[0_0_50px_rgba(6,182,212,0.3)] border-cyan-500/30 overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-b from-cyan-900/10 to-blue-900/10 blur-3xl -z-10"></div>
@@ -957,6 +1209,70 @@
 
     const htmlEl = document.documentElement;
     const colorToggle = document.getElementById('color-toggle');
+// --- PIKACHU THEME LOGIC ---
+    const pikaToggle = document.getElementById('pika-toggle');
+    const pokeballOverlay = document.getElementById('pokeball-overlay');
+    const cineBall = document.getElementById('cine-ball');
+    const lightningContainer = document.getElementById('lightning-container');
+    let isPikachu = false;
+    let lightningInterval;
+
+    // Cursor Ripple Effect
+    window.addEventListener('mousemove', (e) => {
+      if (!isPikachu) return;
+      const ripple = document.createElement('div');
+      ripple.className = 'cursor-ripple';
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      const size = Math.random() * 20 + 20;
+      ripple.style.width = `${size}px`;
+      ripple.style.height = `${size}px`;
+      document.body.appendChild(ripple);
+      setTimeout(() => {
+        if(ripple.parentNode) ripple.parentNode.removeChild(ripple);
+      }, 600);
+    });
+
+    function spawnLightning() {
+      if(!isPikachu) return;
+      const bar = document.createElement('div');
+      bar.className = 'glass-lightning';
+      const h = Math.random() * 15 + 5;
+      const w = Math.random() * 500 + 300;
+      bar.style.height = `${h}px`;
+      bar.style.width = `${w}px`;
+      bar.style.top = `${Math.random() * 100}vh`;
+      bar.style.animationDuration = `${Math.random() * 10 + 15}s`;
+      bar.style.opacity = Math.random() * 0.5 + 0.3;
+      
+      lightningContainer.appendChild(bar);
+      setTimeout(() => { if(bar.parentNode) bar.parentNode.removeChild(bar); }, 26000);
+    }
+
+    pikaToggle.addEventListener('click', () => {
+      pokeballOverlay.classList.add('active');
+      cineBall.classList.remove('flash');
+      
+      setTimeout(() => {
+         cineBall.classList.add('flash'); 
+         setTimeout(() => {
+            isPikachu = !isPikachu;
+            if(isPikachu) {
+              htmlEl.classList.add('theme-pikachu');
+              htmlEl.classList.add('dark');
+              htmlEl.classList.remove('theme-gold');
+              if(lightningInterval) clearInterval(lightningInterval);
+              lightningInterval = setInterval(spawnLightning, 800); 
+            } else {
+              htmlEl.classList.remove('theme-pikachu');
+              clearInterval(lightningInterval);
+              lightningContainer.innerHTML = '';
+            }
+            pokeballOverlay.classList.remove('active');
+         }, 400); 
+      }, 1500); 
+    });
+
 
     colorToggle.addEventListener('click', () => {
       htmlEl.classList.toggle('theme-gold');
@@ -1806,6 +2122,216 @@
         btn.style.transition = 'none';
       });
     });
+
+    // --- SUPABASE & RESUME ANALYZER LOGIC ---
+    const dropZone = document.getElementById('resume-drop-zone');
+    const fileInput = document.getElementById('resume-file-input');
+    const laser = document.getElementById('resume-laser');
+    const resumeTitle = document.getElementById('resume-title');
+    const resumeSubtitle = document.getElementById('resume-subtitle');
+    const outputContainer = document.getElementById('resume-output-container');
+    const resumeTerminalBody = document.getElementById('resume-terminal-body');
+
+    let selectedPersona = 'HR';
+    let selectedTarget = 'Startup';
+    let currentResumeFile = null;
+
+    const personaBtns = document.querySelectorAll('.persona-btn');
+    personaBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        personaBtns.forEach(b => b.setAttribute('data-selected', 'false'));
+        btn.setAttribute('data-selected', 'true');
+        selectedPersona = btn.dataset.value;
+        playClickSound();
+        if (currentResumeFile) startAnalysis(currentResumeFile);
+      });
+    });
+
+    const targetBtns = document.querySelectorAll('.target-btn');
+    targetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        targetBtns.forEach(b => b.setAttribute('data-selected', 'false'));
+        btn.setAttribute('data-selected', 'true');
+        selectedTarget = btn.dataset.value;
+        playClickSound();
+        if (currentResumeFile) startAnalysis(currentResumeFile);
+      });
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-[#38e26a]');
+    });
+    dropZone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#38e26a]');
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#38e26a]');
+      if (e.dataTransfer.files.length) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        handleFile(this.files[0]);
+      }
+    });
+
+    function handleFile(file) {
+      if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+        alert('Please upload a PDF file.');
+        return;
+      }
+      
+      if (file.size > 3 * 1024 * 1024) {
+        alert('File is too large. Max size is 3MB.');
+        return;
+      }
+
+      currentResumeFile = file;
+      startAnalysis(file);
+    }
+
+    // Initialize Supabase Client
+    // Removed because we are sending binary directly to backend for robustness.
+
+    
+    // --- ATS FOLLOW-UP CHAT LOGIC ---
+    let currentResumeText = '';
+    const resumeChatContainer = document.getElementById('resume-chat-container');
+    const resumeChatHistory = document.getElementById('resume-chat-history');
+    const resumeChatForm = document.getElementById('resume-chat-form');
+    const resumeChatInput = document.getElementById('resume-chat-input');
+
+    // Typewriter for HTML Content
+    async function typeHTMLChunks(element, html) {
+      element.innerHTML = '';
+      // Simple chunking by words to animate
+      const words = html.split(' ');
+      let currentHTML = '';
+      for(let word of words) {
+         currentHTML += word + ' ';
+         element.innerHTML = currentHTML;
+         await new Promise(r => setTimeout(r, 10)); // Lightning fast typewriter
+      }
+    }
+
+    resumeChatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q = resumeChatInput.value.trim();
+      if(!q) return;
+      
+      playClickSound();
+      
+      resumeChatHistory.innerHTML += `<div class="text-white"><span class="text-cyan-500">> USER:</span> ${q}</div>`;
+      resumeChatInput.value = '';
+      
+      const aiReplyDiv = document.createElement('div');
+      aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="animate-pulse">Processing...</span>`;
+      resumeChatHistory.appendChild(aiReplyDiv);
+      resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
+
+      try {
+        const res = await fetch('/api/resume-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            resumeText: currentResumeText,
+            persona: selectedPersona,
+            target: selectedTarget,
+            question: q
+          })
+        });
+        const data = await res.json();
+        if(!res.ok) throw new Error(data.error);
+        
+        let formatted = data.reply.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#38e26a]">$1</strong>')
+                                  .replace(/\n/g, '<br>');
+                                  
+        aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="content-span"></span>`;
+        await typeHTMLChunks(aiReplyDiv.querySelector('.content-span'), formatted);
+      } catch (err) {
+        aiReplyDiv.innerHTML = `<span class="text-red-500">> ERR: ${err.message}</span>`;
+      }
+      resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
+    });
+
+    async function startAnalysis(file) {
+      resumeTitle.textContent = "Uploading to Secure Vault...";
+      resumeSubtitle.textContent = `Encrypting ${file.name}...`;
+      laser.style.opacity = '1';
+      laser.classList.add('animate-scan');
+      playTransitionSound();
+
+      outputContainer.classList.remove('hidden');
+      outputContainer.classList.add('flex');
+      resumeTerminalBody.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-10 gap-4">
+          <div class="w-12 h-12 border-4 omni-border border-t-transparent rounded-full animate-spin"></div>
+          <div class="font-mono text-sm tracking-widest uppercase omni-text animate-pulse">Running Neural Network Analysis...</div>
+          <div class="font-mono text-xs tracking-widest text-neutral-500 mt-2 flex items-center gap-2">
+             <i class="ph ph-cpu"></i> Parsing Resume Tokens 
+             <span class="inline-flex space-x-1">
+               <span class="w-1.5 h-1.5 omni-bg rounded-full animate-[bounce_1s_infinite]"></span>
+               <span class="w-1.5 h-1.5 omni-bg rounded-full animate-[bounce_1s_0.2s_infinite]"></span>
+               <span class="w-1.5 h-1.5 omni-bg rounded-full animate-[bounce_1s_0.4s_infinite]"></span>
+             </span>
+          </div>
+        </div>
+      `;
+
+      try {
+        resumeTitle.textContent = "Processing Bio-Data...";
+        resumeSubtitle.textContent = "AI Analysis in progress...";
+
+        // Call Vercel Backend with raw binary PDF
+        const response = await fetch(`/api/analyze-resume?persona=${encodeURIComponent(selectedPersona)}&target=${encodeURIComponent(selectedTarget)}`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/pdf'
+          },
+          body: file
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Server processing failed.');
+        }
+
+        laser.style.opacity = '0';
+        laser.classList.remove('animate-scan');
+        resumeTitle.textContent = "Analysis Complete";
+        resumeSubtitle.textContent = "Report Card Generated";
+        
+        // Parse Markdown to simple HTML
+        currentResumeText = data.resumeText;
+        const htmlContent = data.reply
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#38e26a]">$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/►/g, '<span class="text-[#38e26a]">►</span>')
+          .replace(/\n/g, '<br>');
+          
+        resumeTerminalBody.innerHTML = '';
+        typeText(resumeTerminalBody, htmlContent, 10);
+        
+      } catch (error) {
+        console.error('Analysis Error:', error);
+        laser.style.opacity = '0';
+        laser.classList.remove('animate-scan');
+        resumeTitle.textContent = "Analysis Failed";
+        resumeSubtitle.textContent = "System Error Encountered";
+        resumeTerminalBody.innerHTML = `<span class="text-red-500">Error: ${error.message}</span>`;
+      }
+    }
+
+    function typeText(element, text, speed) {
+      // Very basic typewriter for HTML
+      element.innerHTML = text; // Just injecting it directly for now since it has HTML tags
+    }
 
   </script>
 </body>
