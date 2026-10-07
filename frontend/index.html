@@ -251,6 +251,7 @@
       transform: scale(1.05);
       z-index: 10;
     }
+    #resume-analyzer-shell { animation: none !important; }
     
     /* Ensure Pikachu mode explicitly styles selected buttons so they stand out and aren't swallowed by the wildcard */
     .theme-pikachu .mode-btn[data-selected="true"] {
@@ -683,7 +684,7 @@
 
     <section id="projects" class="w-full mb-20 reveal px-6 max-w-6xl xl:max-w-[1400px] mx-auto">
       <h3 class="font-mono text-neutral-400 dark:text-neutral-500 text-sm tracking-widest uppercase mb-12 xl:mb-20 flex items-center gap-4 zero-g-3 xl:text-base">
-        <i class="ph ph-hard-drives omni-text text-xl"></i> Deployed Infrastructure
+        <i class="ph ph-hard-drives omni-text text-xl"></i> Engineering Case Studies
         <span class="h-px bg-neutral-200 dark:bg-neutral-800 flex-grow"></span>
       </h3>
 
@@ -701,7 +702,7 @@
               <a href="https://aether-q-rag-based-document-t-git-080441-kartikay-sr-s-projects.vercel.app/" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase bg-green-500/20 text-green-500 border border-green-500/50 px-3 py-1 rounded-full hover:bg-green-500 hover:text-black transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.4)]">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP
               </a>
-              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">384-dim search</span>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">RAG + governed analytics</span>
             </div>
             <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Full-stack document retrieval integrating semantic vector search. Features structured REST APIs and authentication.</p>
             <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
@@ -713,20 +714,20 @@
         </div>
 
         <div class="zero-g-2 h-full">
-          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('fraud')">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('nexus')">
             <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
             <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
             <div class="flex justify-between items-start mb-6">
-              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">Fraud Detection Core</h4>
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">Nexus Fraud Intelligence</h4>
               <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
             </div>
             <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
                <a href="https://credit-card-fraud-detection-system-6vazsxh5qzydq6tevghvlk.streamlit.app/" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase bg-green-500/20 text-green-500 border border-green-500/50 px-3 py-1 rounded-full hover:bg-green-500 hover:text-black transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.4)]">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP
               </a>
-              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">95.16% ROC-AUC</span>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">Explainable ML prototype</span>
             </div>
-            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Ensemble ML fraud-detection system (XGBoost) delivered via FastAPI endpoints and real-time dashboard.</p>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Fraud-intelligence prototype combining gradient-boosted models with SHAP explanations; quantum and adaptive-learning work stays on a separate research path.</p>
             <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
               <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Python</span>
               <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">XGBoost</span>
@@ -736,6 +737,26 @@
         </div>
         
         <div class="zero-g-3 h-full">
+          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('gridforge')">
+            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
+            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
+            <div class="flex justify-between items-start mb-6">
+              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">GridForge-AI</h4>
+              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">Simulation prototype</span>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Edge-first energy-intelligence simulation with human-authorized decisions, auditable evidence, and offline event reconciliation. No physical control or verified savings claims.</p>
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Tauri 2</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Rust</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Python</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="zero-g-4 h-full">
           <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('mindineers')">
             <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
             <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
@@ -744,35 +765,14 @@
               <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
             </div>
             <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
-               <a href="https://github.com/KartikaySr/MindineersOS" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
-              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">150+ Plugins</span>
+               <a href="https://github.com/KartikaySr/MindineersOS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
+              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">152 plugins</span>
             </div>
-            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Modular full-stack platform using Bun and React 19, supporting real-time WebSocket updates and massive ecosystem integrations.</p>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Plugin-native agent platform spanning runtime, API, dashboards, cloud control plane, and a governed ecosystem of 152 plugins.</p>
             <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">TypeScript</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">React 19</span>
               <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Bun</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="zero-g-4 h-full">
-          <div class="glass-card p-8 rounded-[2.5rem] flex flex-col h-full spatial-float interactive group cursor-pointer" onclick="openProjectModal('riderouting')">
-            <span class="snake-trace trace-top"></span><span class="snake-trace trace-right"></span>
-            <span class="snake-trace trace-bottom"></span><span class="snake-trace trace-left"></span>
-            <div class="flex justify-between items-start mb-6">
-              <h4 class="font-display text-2xl font-bold text-black dark:text-white group-hover:omni-text transition-colors">Ride Routing API</h4>
-              <i class="ph ph-arrows-out-simple text-neutral-500 group-hover:omni-text transition-colors text-xl"></i>
-            </div>
-            <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
-               <a href="https://github.com/KartikaySr/Full-Stack-Ride-Booking-Application" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
-              <span class="font-mono text-[10px] omni-bg text-black font-bold px-3 py-1 rounded-full ml-auto shadow-[0_0_8px_var(--omni-glow)]">40% Less Latency</span>
-            </div>
-            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">Real-time routing backend using pure WebSockets for live driver/rider location tracking and geospatial queries.</p>
-            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Node.js</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">WebSockets</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">MongoDB</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">TypeScript</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Hono</span>
             </div>
           </div>
         </div>
@@ -787,16 +787,16 @@
             </div>
             <div class="flex items-center gap-3 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-3">
               <a href="https://github.com/KartikaySr/CodeAmbers" target="_blank" onclick="event.stopPropagation();" class="font-mono text-[10px] uppercase text-neutral-500 border border-neutral-300 dark:border-neutral-700 px-3 py-1 rounded-full hover:omni-text hover:omni-border transition-colors flex items-center gap-2"><i class="ph ph-github-logo"></i> Repo</a>
-              <span class="font-mono text-[10px] uppercase bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 font-bold px-3 py-1 rounded-full ml-auto border border-yellow-500/30">IN PROCESS</span>
+              <span class="font-mono text-[10px] uppercase bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 font-bold px-3 py-1 rounded-full ml-auto border border-yellow-500/30">In development</span>
             </div>
             <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed flex-grow mb-4">
-              A multi-agent AI operating system for software engineering — a collaborative workspace where specialized AI agents handle frontend, backend, and DevOps tasks natively in-browser.
+              A collaborative browser-based development workspace bringing chat, code editing, execution, and preview together. Multi-agent orchestration remains in development.
             </p>
             <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] text-neutral-500">
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Next.js</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Groq LLM</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Monaco</span>
-              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Sandpack</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Next.js 15</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Express 5</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">Supabase</span>
+              <span class="px-3 py-1 bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-full">WebSockets</span>
             </div>
           </div>
         </div>
@@ -915,7 +915,7 @@
     <section class="w-full mb-12 reveal px-6 max-w-5xl mx-auto flex flex-col gap-12">
       
       <!-- AI ATS RESUME ANALYZER (Supabase Powered) -->
-      <div class="zero-g-1 w-full">
+      <div id="resume-analyzer-shell" class="zero-g-1 w-full">
         <div class="glass-card p-10 md:p-16 rounded-[3.5rem] relative spatial-float w-full flex flex-col items-center interactive group shadow-[0_0_50px_rgba(56,226,106,0.15)] dark:shadow-[0_0_50px_rgba(56,226,106,0.3)] border-green-500/30 overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-b from-green-900/10 to-emerald-900/10 blur-3xl -z-10"></div>
           
@@ -932,10 +932,10 @@
             <div class="flex flex-col gap-4">
               <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest"><i class="ph ph-user"></i> Select Reviewer Persona</span>
               <div class="grid grid-cols-2 gap-3">
-                <button data-value="HR" data-selected="true" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">👔 HR Director</button>
-                <button data-value="Engineer" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">💻 Tech Lead</button>
-                <button data-value="Recruiter" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🔍 Headhunter</button>
-                <button data-value="CEO" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 CEO / Founder</button>
+                <button type="button" aria-pressed="true" data-value="HR" data-selected="true" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">👔 HR Director</button>
+                <button type="button" aria-pressed="false" data-value="Engineer" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">💻 Tech Lead</button>
+                <button type="button" aria-pressed="false" data-value="Recruiter" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🔍 Headhunter</button>
+                <button type="button" aria-pressed="false" data-value="CEO" data-selected="false" class="persona-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 CEO / Founder</button>
               </div>
             </div>
 
@@ -943,10 +943,10 @@
             <div class="flex flex-col gap-4">
               <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest"><i class="ph ph-target"></i> Select Target Environment</span>
               <div class="grid grid-cols-2 gap-3">
-                <button data-value="Startup" data-selected="true" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 Seed Startup</button>
-                <button data-value="MNC" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🏢 Fortune 500</button>
-                <button data-value="Agency" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🎨 Creative Agency</button>
-                <button data-value="FAANG" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🌐 FAANG / Big Tech</button>
+                <button type="button" aria-pressed="true" data-value="Startup" data-selected="true" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🚀 Seed Startup</button>
+                <button type="button" aria-pressed="false" data-value="MNC" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🏢 Fortune 500</button>
+                <button type="button" aria-pressed="false" data-value="Agency" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🎨 Creative Agency</button>
+                <button type="button" aria-pressed="false" data-value="FAANG" data-selected="false" class="target-btn mode-btn px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono text-xs uppercase hover:omni-border transition-colors">🌐 FAANG / Big Tech</button>
               </div>
             </div>
           </div>
@@ -954,7 +954,7 @@
           <div id="resume-drop-zone" class="w-full relative rounded-2xl border-2 border-dashed border-neutral-300 dark:border-neutral-700 p-12 flex flex-col items-center justify-center bg-neutral-50/50 dark:bg-black/50 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors group cursor-pointer overflow-hidden">
             <div id="resume-laser" class="absolute left-0 right-0 h-1 bg-[#38e26a] shadow-[0_0_15px_#38e26a] opacity-0 transition-opacity z-10 pointer-events-none"></div>
             <i class="ph ph-file-pdf text-4xl mb-4 text-neutral-400 group-hover:omni-text transition-colors"></i>
-            <p class="font-mono text-sm text-neutral-500 mb-6 text-center">Drag & Drop your resume (PDF) here<br><span class="text-xs opacity-70">Max 3MB. Data is sent directly to Supabase Vault.</span></p>
+            <p class="font-mono text-sm text-neutral-500 mb-6 text-center">Drag & Drop your resume (PDF) here<br><span class="text-xs opacity-70">Max 3.5MB. Resume text is sent to Groq; the PDF and report may be stored in Supabase.</span></p>
             <input type="file" id="resume-file-input" accept=".pdf" class="hidden" />
             <button onclick="document.getElementById('resume-file-input').click()" id="resume-upload-btn" class="px-8 py-3 bg-neutral-900 dark:bg-[#0a0a0a] border border-neutral-700 text-white dark:text-white font-mono text-xs tracking-widest uppercase hover:omni-border hover:omni-text transition-all interactive shadow-lg hover:shadow-[0_0_20px_var(--omni-glow)] rounded-full">
               Select PDF
@@ -1413,6 +1413,7 @@
     // Enhanced Spatial Pop (translateZ combined with antigravity wrappers)
     const tiltElements = document.querySelectorAll('.spatial-float');
     tiltElements.forEach(el => {
+      if (el.closest('#resume-analyzer-shell')) return;
       el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -1723,46 +1724,52 @@
 
     const projectData = {
       'aetherq': {
-        title: 'AetherQ', sub: 'AI Document Intelligence',
-        prob: `<p class="mb-2">Enterprise documentation is siloed. Keyword search fails when users ask natural language questions requiring context across hundreds of PDF pages.</p>`,
-        arch: `<p class="mb-2">Built a semantic vector search pipeline using <strong>Next.js, Node.js, and pgvector</strong>. Documents are chunked and embedded into 384-dimensional space, allowing RAG-based context retrieval with high precision.</p>`,
+        title: 'AetherQ', sub: 'Document RAG + Governed Analytics',
+        prob: `<p>AetherQ unifies document retrieval, analytical queries, and general chat. Its case study focuses on safely combining these modalities without allowing generated SQL or untrusted documents to become privileged operations.</p>
+               <p><strong class="text-white">Boundary:</strong> Scanned-document OCR and production certification are explicitly out of scope.</p>`,
+        arch: `<p><strong class="text-white">Intent routing:</strong> Requests are classified into document retrieval, analytics SQL, combined analytics + documents, or general chat.</p>
+               <p><strong class="text-white">SQL containment:</strong> A parsed SQL AST is restricted to a single allow-listed SELECT; queries use a non-superuser read-only warehouse role, timeouts, and a hard row limit.</p>
+               <p><strong class="text-white">User data:</strong> Supabase RLS, private document storage, and fail-closed database-backed quotas protect workspace operations.</p>`,
         buttons: `<a href="https://aether-q-rag-based-document-t-git-080441-kartikay-sr-s-projects.vercel.app/" target="_blank" class="px-5 py-2 bg-green-500/20 text-green-400 border border-green-500/50 hover:bg-green-500 hover:text-black font-mono text-xs uppercase tracking-widest rounded transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP</a>
                   <a href="https://github.com/KartikaySr/AetherQ--RAG-based-Document-Text---to---SQL-analyzer" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> Repo</a>`
       },
-      'fraud': {
-        title: 'Fraud Detection Core', sub: 'Applied ML',
-        prob: `<p class="mb-2">Credit card fraud patterns evolve rapidly. Rule-based systems generate high false positives, leading to blocked legitimate transactions and frustrated users.</p>`,
-        arch: `<p class="mb-2">Engineered an ensemble ML pipeline combining <strong>XGBoost, LightGBM, and CatBoost</strong>. Achieved 95.16% ROC-AUC. Wrapped the models in high-performance <strong>FastAPI</strong> endpoints for real-time inference scoring.</p>`,
+      'nexus': {
+        title: 'Nexus Fraud Intelligence', sub: 'Explainable Fraud-Detection Prototype',
+        prob: `<p>Fraud scoring needs to provide analysts with reasons behind a flag, not just a probability. Nexus combines a gradient-boosted ensemble, per-transaction explanations, and a streaming analyst interface.</p>
+               <p><strong class="text-white">Status:</strong> The documented sub-50 ms p95 is a target, not a verified benchmark. Quantum and adaptive-learning components are separate research tracks.</p>`,
+        arch: `<p><strong class="text-white">Scoring:</strong> FastAPI orchestrates XGBoost, LightGBM, and CatBoost models over normalized transaction features.</p>
+               <p><strong class="text-white">Explainability:</strong> SHAP feature attribution is surfaced with a fallback narrative layer; streaming surfaces use WebSockets and SSE.</p>
+               <p><strong class="text-white">Research boundary:</strong> Quantum detection and adaptive learning are isolated from the classical scoring path described in the architecture notes.</p>`,
         buttons: `<a href="https://credit-card-fraud-detection-system-6vazsxh5qzydq6tevghvlk.streamlit.app/" target="_blank" class="px-5 py-2 bg-green-500/20 text-green-400 border border-green-500/50 hover:bg-green-500 hover:text-black font-mono text-xs uppercase tracking-widest rounded transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE APP</a>
                   <a href="https://github.com/KartikaySr/Credit-Card-Fraud-Detection-System" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> Repo</a>`
       },
+      'gridforge': {
+        title: 'GridForge-AI', sub: 'Edge-First Energy Intelligence Simulation',
+        prob: `<p>GridForge models demand-response decisions where forecasts must be traceable, constrained, authorized by a human, and verified against subsequent evidence.</p>
+               <p><strong class="text-white">Important boundary:</strong> This is a simulation prototype. Inputs and financial values are synthetic; it has no physical OT/SCADA write capability and makes no verified utility-savings claim.</p>`,
+        arch: `<p><strong class="text-white">Three tiers:</strong> React in a Tauri 2 WebView, a Rust supervisor for lifecycle/IPC/credentials, and an asynchronous Python edge runtime backed by SQLite WAL.</p>
+               <p><strong class="text-white">Decision chain:</strong> Fourteen stages carry telemetry through validation, forecast, constraints, human authorization, simulated dispatch, verification, and audit.</p>
+               <p><strong class="text-white">Resilience:</strong> Versioned event streams, transactional outboxes, and an idempotent receiver support disconnected operation and explicit conflict handling.</p>
+               <p><strong class="text-white">Verification:</strong> The docs record 236 passing local tests across Python, TypeScript, and Rust; this is test evidence, not production certification.</p>`,
+        buttons: `<span class="px-5 py-2 border border-yellow-500/30 text-yellow-400 font-mono text-xs uppercase tracking-widest rounded">Simulation Prototype</span>`
+      },
       'mindineers': {
-        title: 'MindineersOS', sub: 'Full-Stack Platform',
-        prob: `<p class="mb-2">Developing extensible software platforms often requires complex monolithic architectures. MindineersOS sought to solve this by creating a modular ecosystem where plugins can be hot-swapped dynamically.</p>`,
-        arch: `<p class="mb-2">Engineered using <strong>Bun, React 19, and Drizzle ORM</strong>. The architecture supports real-time WebSocket updates and currently handles 150+ ecosystem plugins with high-performance Postgres integration.</p>`,
+        title: 'MindineersOS', sub: 'Plugin-Native Agent Platform',
+        prob: `<p>MindineersOS explores how one agent runtime can support many capabilities and deployment surfaces without coupling the system to a single model provider or plugin.</p>
+               <p><strong class="text-white">Scale:</strong> The architecture notes describe a large monorepo with 152 plugin entries and call out ownership and overlapping-surface complexity as ongoing concerns.</p>`,
+        arch: `<p><strong class="text-white">Core:</strong> A TypeScript agent framework and runtime load plugins that register actions, providers, services, evaluators, routes, and events.</p>
+               <p><strong class="text-white">Surfaces:</strong> Bun workspaces and Turbo coordinate local runtime, CLI, dashboards, APIs, and a Cloudflare Workers control plane; Drizzle and PostgreSQL/pgvector support persistence.</p>
+               <p><strong class="text-white">Engineering focus:</strong> Governance tooling, scenario evaluation, and benchmark suites help manage the breadth of the plugin ecosystem.</p>`,
         buttons: `<a href="https://github.com/KartikaySr/MindineersOS" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white flex items-center gap-2"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
       },
-      'riderouting': {
-        title: 'Ride Routing Platform', sub: 'Real-Time Routing API',
-        prob: `<p class="mb-2">Ride-sharing platforms suffer from high latency during state-syncs between drivers and riders, leading to poor user experience and phantom driver locations.</p>`,
-        arch: `<p class="mb-2">Built a <strong>Node.js & React</strong> backend using pure <strong>WebSockets</strong> for real-time location synchronization. Optimized the <strong>MongoDB</strong> schema for geospatial queries, reducing state-sync latency by 40%.</p>`,
-        buttons: `<a href="https://github.com/KartikaySr/Full-Stack-Ride-Booking-Application" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white flex items-center gap-2"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
-      },
       'codeambers': {
-        title: 'CodeAmbers', sub: 'AI-Native Engineering Workspace',
-        prob: `<p class="mb-2">Traditional IDEs require heavy context switching when collaborating with AI tools. Developers need a unified environment where autonomous agents can natively read, write, and execute code within the browser.</p>`,
-        arch: `<p class="mb-1 font-bold omni-text">Currently live:</p>
-               <ul class="list-disc list-inside mb-3 space-y-1 text-xs">
-                 <li>In-browser Monaco code editor with Sandpack for real-time code execution and preview</li>
-                 <li>User authentication and session management via Supabase</li>
-                 <li>Next.js/TypeScript frontend architecture, built for extensibility as agent capabilities are added</li>
-               </ul>
-               <p class="mb-1 font-bold omni-text">In active development:</p>
-               <ul class="list-disc list-inside space-y-1 text-xs">
-                 <li>Multi-agent orchestration layer (backend scaffolded with Groq LLM integration and WebSocket support for real-time agent communication)</li>
-                 <li>Autonomous agents for code generation, review, and deployment workflows</li>
-               </ul>
-               <p class="mt-4 text-[10px] text-neutral-500 uppercase tracking-widest">Tech stack: Next.js, React 19, TypeScript, Tailwind CSS, Monaco Editor, Sandpack, Express, Supabase, Groq, WebSocket</p>`,
+        title: 'CodeAmbers', sub: 'Collaborative AI Development Workspace',
+        prob: `<p>CodeAmbers brings a human developer and LLM-backed agents into one browser workspace for authoring, executing, previewing, and iterating on software.</p>
+               <p><strong class="text-white">Product boundary:</strong> Multi-agent orchestration is documented as in development; this case study distinguishes the current workspace from planned autonomous workflows.</p>`,
+        arch: `<p><strong class="text-white">Two deployable services:</strong> A Next.js 15 frontend and TypeScript/Express 5 backend are connected through a workspace monorepo.</p>
+               <p><strong class="text-white">Workspace state:</strong> Supabase Postgres with Row-Level Security is the server-authoritative source of workspace and file data.</p>
+               <p><strong class="text-white">Interaction:</strong> The IDE-style surface combines chat, editor, terminal, and preview; WebSockets stream agent output, with REST routes for workspaces, files, chat, upload, and execution.</p>
+               <p><strong class="text-white">Deployment:</strong> The documented split maps the frontend to Vercel and the backend to Render.</p>`,
         buttons: `<a href="https://github.com/KartikaySr/CodeAmbers" target="_blank" class="px-5 py-2 border border-white/20 hover:border-white/60 font-mono text-xs uppercase tracking-widest rounded transition-colors text-white"><i class="ph ph-github-logo"></i> GitHub Repo</a>`
       }
     };
@@ -2155,10 +2162,10 @@
           if (this.y < 0 || this.y > streamCanvas.height) this.vy *= -1;
           
           // Repel from cursor
-          const dx = this.x - cursorX;
-          const dy = this.y - cursorY;
+          const dx = this.x - mouseX;
+          const dy = this.y - mouseY;
           const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 150) {
+          if (dist > 0 && dist < 150) {
             this.x += (dx / dist) * 1;
             this.y += (dy / dist) * 1;
           }
@@ -2236,7 +2243,7 @@
     // --- 5. MAGNETIC BUTTONS ---
     document.querySelectorAll('.interactive, button, a').forEach(btn => {
       // Ignore terminal inputs and snake controls to avoid annoying ux
-      if(btn.id === 'terminal-input' || btn.id.startsWith('btn-') || btn.closest('#snake-controls')) return;
+      if(btn.id === 'terminal-input' || btn.id.startsWith('btn-') || btn.closest('#snake-controls, #resume-analyzer-shell') || btn.matches('.mode-btn')) return;
       
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -2269,8 +2276,12 @@
     const personaBtns = document.querySelectorAll('.persona-btn');
     personaBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        personaBtns.forEach(b => b.setAttribute('data-selected', 'false'));
+        personaBtns.forEach(b => {
+          b.setAttribute('data-selected', 'false');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.setAttribute('data-selected', 'true');
+        btn.setAttribute('aria-pressed', 'true');
         selectedPersona = btn.dataset.value;
         playClickSound();
         // Removed auto-retrigger to allow users to select options safely
@@ -2280,8 +2291,12 @@
     const targetBtns = document.querySelectorAll('.target-btn');
     targetBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        targetBtns.forEach(b => b.setAttribute('data-selected', 'false'));
+        targetBtns.forEach(b => {
+          b.setAttribute('data-selected', 'false');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.setAttribute('data-selected', 'true');
+        btn.setAttribute('aria-pressed', 'true');
         selectedTarget = btn.dataset.value;
         playClickSound();
         // Removed auto-retrigger to allow users to select options safely
@@ -2316,8 +2331,8 @@
         return;
       }
       
-      if (file.size > 3 * 1024 * 1024) {
-        alert('File is too large. Max size is 3MB.');
+      if (file.size > 3.5 * 1024 * 1024) {
+        alert('File is too large. Max size is 3.5MB.');
         return;
       }
 
@@ -2349,45 +2364,47 @@
       }
     }
 
-    resumeChatForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const q = resumeChatInput.value.trim();
-      if(!q) return;
-      
-      playClickSound();
-      
-      resumeChatHistory.innerHTML += `<div class="text-white"><span class="text-cyan-500">> USER:</span> ${q}</div>`;
-      resumeChatInput.value = '';
-      
-      const aiReplyDiv = document.createElement('div');
-      aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="animate-pulse">Processing...</span>`;
-      resumeChatHistory.appendChild(aiReplyDiv);
-      resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
+    if (resumeChatForm && resumeChatInput && resumeChatHistory) {
+      resumeChatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const q = resumeChatInput.value.trim();
+        if(!q) return;
 
-      try {
-        const res = await fetch('/api/resume-chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            resumeText: currentResumeText,
-            persona: selectedPersona,
-            target: selectedTarget,
-            question: q
-          })
-        });
-        const data = await res.json();
-        if(!res.ok) throw new Error(data.error);
-        
-        let formatted = data.reply.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#38e26a]">$1</strong>')
-                                  .replace(/\n/g, '<br>');
-                                  
-        aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="content-span"></span>`;
-        await typeHTMLChunks(aiReplyDiv.querySelector('.content-span'), formatted);
-      } catch (err) {
-        aiReplyDiv.innerHTML = `<span class="text-red-500">> ERR: ${err.message}</span>`;
-      }
-      resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
-    });
+        playClickSound();
+
+        resumeChatHistory.innerHTML += `<div class="text-white"><span class="text-cyan-500">> USER:</span> ${q}</div>`;
+        resumeChatInput.value = '';
+
+        const aiReplyDiv = document.createElement('div');
+        aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="animate-pulse">Processing...</span>`;
+        resumeChatHistory.appendChild(aiReplyDiv);
+        resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
+
+        try {
+          const res = await fetch('/api/resume-chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              resumeText: currentResumeText,
+              persona: selectedPersona,
+              target: selectedTarget,
+              question: q
+            })
+          });
+          const data = await res.json();
+          if(!res.ok) throw new Error(data.error);
+
+          let formatted = data.reply.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#38e26a]">$1</strong>')
+                                    .replace(/\n/g, '<br>');
+
+          aiReplyDiv.innerHTML = `<span class="text-[#38e26a]">> ATS:</span> <span class="content-span"></span>`;
+          await typeHTMLChunks(aiReplyDiv.querySelector('.content-span'), formatted);
+        } catch (err) {
+          aiReplyDiv.innerHTML = `<span class="text-red-500">> ERR: ${err.message}</span>`;
+        }
+        resumeChatHistory.scrollTop = resumeChatHistory.scrollHeight;
+      });
+    }
 
     async function startAnalysis(file) {
       resumeTitle.textContent = "Uploading to Secure Vault...";
