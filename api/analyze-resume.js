@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-const pdfParse = require('pdf-parse');
+const pdfParse = require('pdf-parse-new');
 
 export const config = {
   api: {
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         temperature: 0.7,
         max_tokens: 1024,
       })

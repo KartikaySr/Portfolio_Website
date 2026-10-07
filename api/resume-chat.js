@@ -38,14 +38,17 @@ export default async function handler(req, res) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: question }
         ],
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         temperature: 0.7,
         max_tokens: 2000,
       })
     });
 
     if (!groqResponse.ok) {
-      return res.status(500).json({ error: 'AI chat processing failed.' });
+      const providerError = await groqResponse.json().catch(() => ({}));
+      const message = providerError?.error?.message || groqResponse.statusText;
+      console.error(`Groq resume-chat error (${groqResponse.status}): ${message}`);
+      return res.status(502).json({ error: `AI provider request failed (${groqResponse.status}).` });
     }
 
     const groqData = await groqResponse.json();

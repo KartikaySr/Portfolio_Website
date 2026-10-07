@@ -30,7 +30,13 @@ export default async function handler(req) {
     const { message } = await req.json();
 
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
-    console.log("Using API Key:", apiKey ? `Key exists (length: ${apiKey.length})` : 'MISSING!');
+    if (!apiKey) {
+      console.error('Chat API configuration error: GROQ_API_KEY is missing.');
+      return new Response(JSON.stringify({ error: 'AI service is not configured.' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
     
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -39,7 +45,7 @@ export default async function handler(req) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: message }
@@ -51,12 +57,26 @@ export default async function handler(req) {
     });
 
     if (!response.ok) {
-      throw new Error(`Groq API error: ${response.statusText}`);
+      const providerError = await response.json().catch(() => ({}));
+      const message = providerError?.error?.message || response.statusText;
+      console.error(`Groq API error (${response.status}): ${message}`);
+      return new Response(JSON.stringify({ error: `AI provider request failed (${response.status}).` }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const data = await response.json();
-    
-    let reply = data.choices[0].message.content;
+    const content = data.choices?.[0]?.message?.content;
+    if (typeof content !== 'string' || !content.trim()) {
+      console.error('Groq API returned no message content.');
+      return new Response(JSON.stringify({ error: 'AI provider returned an empty response.' }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    let reply = content;
     
     // STRIP REASONING LOGIC
     reply = reply.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
