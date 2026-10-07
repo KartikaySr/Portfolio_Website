@@ -27,6 +27,11 @@ export default async function handler(req, res) {
     CRITICAL RULE: You MUST output YOUR ENTIRE RESPONSE strictly as a concise list of bullet points using ►. Do NOT write conversational filler, intro paragraphs, or conclusion paragraphs. Just provide the pointers.
     Here is the candidate's raw resume text for your reference:\n\n${resumeText.substring(0, 5000)}`;
 
+    if (!process.env.GROQ_API_KEY?.trim()) {
+      console.error('Resume chat configuration error: GROQ_API_KEY is missing.');
+      return res.status(500).json({ error: 'AI service is not configured.' });
+    }
+
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {

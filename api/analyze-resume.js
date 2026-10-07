@@ -71,6 +71,11 @@ export default async function handler(req, res) {
     
     const userPrompt = `Here is the raw text extracted from the candidate's resume:\n\n${resumeText}\n\nAnalyze it based on your persona and target environment. Give a score out of 100, identify red flags, and highlight key strengths.`;
 
+    if (!process.env.GROQ_API_KEY?.trim()) {
+      console.error('Resume analysis configuration error: GROQ_API_KEY is missing.');
+      return res.status(500).json({ error: 'AI service is not configured.' });
+    }
+
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
